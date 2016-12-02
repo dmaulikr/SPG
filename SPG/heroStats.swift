@@ -10,11 +10,13 @@ import Foundation
 import SpriteKit
 class HeroStats {
     
+    
+    // This is so that in the same instance of the game is remebered
+    static var SIHero = HeroStats()// fuck this is handy
+    
     var currHealth = Double(0)
     var currAttack = Double(0)
     var currDefense = Double(0)
-    
-
     
     var baseHealth = Double(0)
     var baseAttack = Double(0)
@@ -30,7 +32,8 @@ class HeroStats {
     
     init ()
     {
-        baseHealth = 10
+        
+        baseHealth = 20
         baseAttack = 2
         baseDefense = 5
         
@@ -55,8 +58,8 @@ class HeroStats {
         startItem3.setStats(nName: "Shitty Sword 3", nHealth: 0, nAttack: 0, nDefense: 1)
         
         equipItem(whichSlot: 1, newItem: startItem1)
-                equipItem(whichSlot: 2, newItem: startItem2)
-                equipItem(whichSlot: 3, newItem: startItem3)
+        equipItem(whichSlot: 2, newItem: startItem2)
+        equipItem(whichSlot: 3, newItem: startItem3)
     }
     
     func equipItem (whichSlot:UInt32,newItem:Items)
@@ -82,6 +85,8 @@ class HeroStats {
         currDefense = item1.defense + item2.defense + item3.defense + baseDefense
     }
     
+    
+    
     func gainEXP (EXPgained:Double)
     {
         currEXP = currEXP + EXPgained
@@ -89,14 +94,33 @@ class HeroStats {
         if (currEXP >= needEXP)
         {
             level = level + 1
+            baseAttack = baseAttack + (baseAttack * (level / 15))
+            baseHealth = baseHealth + (baseHealth * (level / 10))
+            baseDefense = baseDefense + (baseDefense * (level / 12))
+            
+            
             currEXP = currEXP - needEXP
         }
         
     }
+    // get a random number in a range
+    func randomRange(min: UInt32,max: UInt32) -> UInt32{
+        let range = min..<max
+        return range.lowerBound + arc4random_uniform(range.upperBound - range.lowerBound + 1)
+    }
     
     func gotAttacked (incAttack:Double)
     {
-        currHealth =  currHealth - ( incAttack - (currDefense * 0.1))
+        let attackMod = randomRange(min: 0, max: 200) // 0 to 200 mean that the attack could do double or nothing somewhere inbetween and all that jazz
+        let dAttackMod = Double(attackMod) / 100
+        let attack = incAttack * dAttackMod
+        
+        
+        if ((currDefense * 0.1) < attack)
+        {
+            currHealth =  currHealth - ( attack - (currDefense * 0.1))
+        }
+        
     }
     
     

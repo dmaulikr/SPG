@@ -61,7 +61,22 @@ class GameScene: SKScene {
                 scene.size = skView.bounds.size
                 skView.presentScene(scene)
             }
-            
+            if self.atPoint(location) == self.aboutButton{
+                let scene = AboutScene(size: self.size)
+                let skView = self.view! as SKView
+                skView.ignoresSiblingOrder = true
+                scene.scaleMode = .resizeFill
+                scene.size = skView.bounds.size
+                skView.presentScene(scene)
+            }
+            if self.atPoint(location) == self.instructionButton{
+                let scene = InstructionScene(size: self.size)
+                let skView = self.view! as SKView
+                skView.ignoresSiblingOrder = true
+                scene.scaleMode = .resizeFill
+                scene.size = skView.bounds.size
+                skView.presentScene(scene)
+            }
 
         }
     }

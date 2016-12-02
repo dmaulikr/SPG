@@ -29,22 +29,28 @@ class PlayScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     let CharacterHPTl = SKLabelNode(fontNamed: "Chalkduster")
     let CharacterAttTl = SKLabelNode(fontNamed: "Chalkduster")
     let CharacterDefTl = SKLabelNode(fontNamed: "Chalkduster")
+    let CharacterLvlTl = SKLabelNode(fontNamed: "Chalkduster")
+    let CharacterExpTl = SKLabelNode(fontNamed: "Chalkduster")
     
     // These are for all the selected Item stats and all that Jazz
     let ItemTl = SKLabelNode(fontNamed: "Chalkduster")
     let ItemHPTl = SKLabelNode(fontNamed: "Chalkduster")
     let ItemAttTl = SKLabelNode(fontNamed: "Chalkduster")
     let ItemDefTl = SKLabelNode(fontNamed: "Chalkduster")
-    
+    let ItemNameTl = SKLabelNode(fontNamed: "Chalkduster")
     // Buttons on the bottom Like Adventure and leave and all that jazz
     let adventureButton = SKSpriteNode(imageNamed:"play")
     let backButton = SKSpriteNode(imageNamed:"about")
     
-    var inven = Inventory()
+    var inven = Inventory.SIinven
+    
+    
+    
     
     var heroInfo = HeroStats()
     
     override func didMove(to view: SKView) {
+        heroInfo = HeroStats.SIHero
         heroInfo.updateStats()
         bg.size.height = self.size.height
         bg.size.width = self.size.width
@@ -63,22 +69,34 @@ class PlayScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         self.CharacterTl.text = "Hero Stats"
         self.CharacterTl.fontSize = 32
         self.CharacterTl.fontColor  = UIColor.orange
-        self.CharacterTl.position = CGPoint(x: self.frame.midX / 2, y: (self.frame.maxY + self.frame.midY) / 2.65)
+        self.CharacterTl.position = CGPoint(x: self.frame.midX / 2, y: (self.frame.maxY + self.frame.midY) / 2.35)
         self.CharacterTl.zPosition = 1
         
-        self.CharacterHPTl.text = "Health: \(heroInfo.currHealth)"
+        self.CharacterLvlTl.text = "Level: \(heroInfo.level)"
+        self.CharacterLvlTl.fontSize = 24
+        self.CharacterLvlTl.fontColor  = UIColor.orange
+        self.CharacterLvlTl.position = CGPoint(x: self.frame.midX / 2, y: (self.frame.maxY + self.frame.midY) / 2.55)
+        self.CharacterLvlTl.zPosition = 1
+        
+        self.CharacterExpTl.text = "EXP: \(heroInfo.currEXP) / \(heroInfo.needEXP)"
+        self.CharacterExpTl.fontSize = 24
+        self.CharacterExpTl.fontColor  = UIColor.orange
+        self.CharacterExpTl.position = CGPoint(x: self.frame.midX / 2, y: (self.frame.maxY + self.frame.midY) / 2.75)
+        self.CharacterExpTl.zPosition = 1
+        
+        self.CharacterHPTl.text = "Health: \(Double(round(100 * heroInfo.currHealth)/100))"
         self.CharacterHPTl.fontSize = 24
         self.CharacterHPTl.fontColor  = UIColor.orange
         self.CharacterHPTl.position = CGPoint(x: self.frame.midX / 2, y: (self.frame.maxY + self.frame.midY) / 2.95)
         self.CharacterHPTl.zPosition = 1
         
-        self.CharacterAttTl.text = "Attack: \(heroInfo.currAttack)"
+        self.CharacterAttTl.text = "Attack: \(Double(round(100 * heroInfo.currAttack)/100))"
         self.CharacterAttTl.fontSize = 24
         self.CharacterAttTl.fontColor  = UIColor.orange
         self.CharacterAttTl.position = CGPoint(x: self.frame.midX / 2, y: (self.frame.maxY + self.frame.midY) / 3.25)
         self.CharacterAttTl.zPosition = 1
         
-        self.CharacterDefTl.text = "Defense: \(heroInfo.currDefense)"
+        self.CharacterDefTl.text = "Defense: \(Double(round(100 * heroInfo.currDefense)/100))"
         self.CharacterDefTl.fontSize = 24
         self.CharacterDefTl.fontColor  = UIColor.orange
         self.CharacterDefTl.position = CGPoint(x: self.frame.midX / 2, y: (self.frame.maxY + self.frame.midY) / 3.55)
@@ -107,6 +125,12 @@ class PlayScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         self.ItemDefTl.fontColor  = UIColor.orange
         self.ItemDefTl.position = CGPoint(x: self.frame.midX / 2, y: (self.frame.maxY + self.frame.midY) / 6.6)
         self.ItemDefTl.zPosition = 1
+        
+        self.ItemNameTl.text = "Name: "
+        self.ItemNameTl.fontSize = 24
+        self.ItemNameTl.fontColor  = UIColor.orange
+        self.ItemNameTl.position = CGPoint(x: self.frame.midX / 2, y: (self.frame.maxY + self.frame.midY) / 7.6)
+        self.ItemNameTl.zPosition = 1
         
         
         //MARK: Button positions
@@ -149,19 +173,23 @@ class PlayScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         
         heroInfo.item3.changeColor(nColor: UIColor.green)
         
-        self.addChild(self.heroInfo.item1.itemNode)
-        self.addChild(self.heroInfo.item2.itemNode)
-        self.addChild(self.heroInfo.item3.itemNode)
+        
         self.addChild(self.CharacterTl)
         self.addChild(self.CharacterHPTl)
         self.addChild(self.CharacterAttTl)
         self.addChild(self.CharacterDefTl)
+        self.addChild(self.CharacterLvlTl)
+        self.addChild(self.CharacterExpTl)
         
+        self.addChild(self.heroInfo.item1.itemNode)
+        self.addChild(self.heroInfo.item2.itemNode)
+        self.addChild(self.heroInfo.item3.itemNode)
         
         self.addChild(self.ItemTl)
         self.addChild(self.ItemHPTl)
         self.addChild(self.ItemAttTl)
         self.addChild(self.ItemDefTl)
+        self.addChild(self.ItemNameTl)
         
         self.addChild(self.InventoryTl)
         self.addChild(self.bg)
@@ -181,7 +209,7 @@ class PlayScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
             let location = touch.location(in: self)
             // all the difrent buttons
             if self.atPoint(location) == self.backButton{
-                let scene = GameScene(size: self.size)
+                let scene = AboutScene(size: self.size)
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill
@@ -189,8 +217,10 @@ class PlayScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 skView.presentScene(scene)
             }
             
+            //MARK: Adventure Button
             if self.atPoint(location) == self.adventureButton{
                 let scene = AdventureScene(size: self.size)
+                HeroStats.SIHero = heroInfo
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill
@@ -200,7 +230,7 @@ class PlayScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
             
             if self.atPoint(location) == self.heroInfo.item1.itemNode{
                 heroInfo.item1.changeColor(nColor: UIColor.black)
-
+                
                 heroInfo.item3.changeColor(nColor: UIColor.green)
                 heroInfo.item2.changeColor(nColor: UIColor.green)
                 
@@ -225,11 +255,12 @@ class PlayScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 self.ItemHPTl.text = "Health: \(heroInfo.item1.health)"
                 self.ItemAttTl.text = "Attack: \(heroInfo.item1.attack)"
                 self.ItemDefTl.text = "Defense: \(heroInfo.item1.defense)"
+                self.ItemNameTl.text = "Name: \(heroInfo.item1.name)"
             }
             
             if self.atPoint(location) == self.heroInfo.item2.itemNode{
                 heroInfo.item2.changeColor(nColor: UIColor.black)
-
+                
                 heroInfo.item1.changeColor(nColor: UIColor.green)
                 heroInfo.item3.changeColor(nColor: UIColor.green)
                 
@@ -253,11 +284,12 @@ class PlayScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 self.ItemHPTl.text = "Health: \(heroInfo.item2.health)"
                 self.ItemAttTl.text = "Attack: \(heroInfo.item2.attack)"
                 self.ItemDefTl.text = "Defense: \(heroInfo.item2.defense)"
+                self.ItemNameTl.text = "Name: \(heroInfo.item2.name)"
             }
             
             if self.atPoint(location) == self.heroInfo.item3.itemNode{
                 heroInfo.item3.changeColor(nColor: UIColor.black)
-
+                
                 heroInfo.item1.changeColor(nColor: UIColor.green)
                 heroInfo.item2.changeColor(nColor: UIColor.green)
                 
@@ -281,6 +313,7 @@ class PlayScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 self.ItemHPTl.text = "Health: \(heroInfo.item3.health)"
                 self.ItemAttTl.text = "Attack: \(heroInfo.item3.attack)"
                 self.ItemDefTl.text = "Defense: \(heroInfo.item3.defense)"
+                self.ItemNameTl.text = "Name: \(heroInfo.item3.name)"
             }
             
             
@@ -293,6 +326,7 @@ class PlayScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                     self.ItemHPTl.text = "Health: \(item.health)"
                     self.ItemAttTl.text = "Attack: \(item.attack)"
                     self.ItemDefTl.text = "Defense: \(item.defense)"
+                    self.ItemNameTl.text = "Name: \(item.name)"
                     heroInfo.item1.changeColor(nColor: UIColor.green)
                     heroInfo.item2.changeColor(nColor: UIColor.green)
                     heroInfo.item3.changeColor(nColor: UIColor.green)

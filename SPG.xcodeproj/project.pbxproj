@@ -14,6 +14,8 @@
 		3F378FD11DEFF32B006211AB /* inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FD01DEFF32B006211AB /* inventory.swift */; };
 		3F378FD31DF123BE006211AB /* AdventureScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FD21DF123BE006211AB /* AdventureScene.swift */; };
 		3F378FD51DF13141006211AB /* Adventure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FD41DF13141006211AB /* Adventure.swift */; };
+		3F378FD71DF239CC006211AB /* aboutScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FD61DF239CC006211AB /* aboutScene.swift */; };
+		3F378FD91DF23B2D006211AB /* instructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FD81DF23B2D006211AB /* instructionsScene.swift */; };
 		3F3862471DE67BA30071472C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3862461DE67BA30071472C /* AppDelegate.swift */; };
 		3F3862491DE67BA30071472C /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F3862481DE67BA30071472C /* GameScene.sks */; };
 		3F38624B1DE67BA30071472C /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F38624A1DE67BA30071472C /* Actions.sks */; };
@@ -32,6 +34,8 @@
 		3F378FD01DEFF32B006211AB /* inventory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inventory.swift; sourceTree = "<group>"; };
 		3F378FD21DF123BE006211AB /* AdventureScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureScene.swift; sourceTree = "<group>"; };
 		3F378FD41DF13141006211AB /* Adventure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Adventure.swift; sourceTree = "<group>"; };
+		3F378FD61DF239CC006211AB /* aboutScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aboutScene.swift; sourceTree = "<group>"; };
+		3F378FD81DF23B2D006211AB /* instructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = instructionsScene.swift; sourceTree = "<group>"; };
 		3F3862431DE67BA30071472C /* SPG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3862461DE67BA30071472C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F3862481DE67BA30071472C /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 				3F38624C1DE67BA30071472C /* GameScene.swift */,
 				3F378FC51DE69DB6006211AB /* PlayScene.swift */,
 				3F378FD21DF123BE006211AB /* AdventureScene.swift */,
+				3F378FD61DF239CC006211AB /* aboutScene.swift */,
+				3F378FD81DF23B2D006211AB /* instructionsScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -75,6 +81,13 @@
 				3F378FD41DF13141006211AB /* Adventure.swift */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		3F378FDA1DF24127006211AB /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 		3F38623A1DE67BA30071472C = {
@@ -96,6 +109,7 @@
 		3F3862451DE67BA30071472C /* SPG */ = {
 			isa = PBXGroup;
 			children = (
+				3F378FDA1DF24127006211AB /* Sounds */,
 				3F378FCB1DE6AD13006211AB /* Classes */,
 				3F378FC81DE69DC6006211AB /* Scenes */,
 				3F3862461DE67BA30071472C /* AppDelegate.swift */,
@@ -185,10 +199,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F378FD71DF239CC006211AB /* aboutScene.swift in Sources */,
 				3F378FD11DEFF32B006211AB /* inventory.swift in Sources */,
 				3F38624D1DE67BA30071472C /* GameScene.swift in Sources */,
 				3F38624F1DE67BA30071472C /* GameViewController.swift in Sources */,
 				3F378FD31DF123BE006211AB /* AdventureScene.swift in Sources */,
+				3F378FD91DF23B2D006211AB /* instructionsScene.swift in Sources */,
 				3F378FCA1DE6AADC006211AB /* heroStats.swift in Sources */,
 				3F378FCF1DE6BF08006211AB /* enemy.swift in Sources */,
 				3F378FC61DE69DB6006211AB /* PlayScene.swift in Sources */,

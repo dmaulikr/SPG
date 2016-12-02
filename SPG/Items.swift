@@ -27,13 +27,13 @@ class Items {
     func setPositons (xP: Double,yP: Double)
     {
         
-
+        
         xPos = xP
         yPos = yP
         itemNode = SKShapeNode(rectOf: CGSize(width: self.xSize, height: ySize))
         itemPos = CGPoint(x: self.xPos, y: self.yPos)
         itemNode.name = "itemBlocks"
-itemNode.fillColor = UIColor.orange
+        itemNode.fillColor = UIColor.orange
         itemNode.position = CGPoint(x: xP,y: yP )
         itemNode.zPosition = 100
         

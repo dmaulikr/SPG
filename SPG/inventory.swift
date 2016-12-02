@@ -9,8 +9,8 @@
 import Foundation
 class Inventory {
     
-    var itemList = [Items]()
-    
+     var itemList = [Items]()
+    static var SIinven = Inventory()
     func addItem (nItem: Items)
     {
         itemList.append(nItem)
