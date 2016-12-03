@@ -50,6 +50,7 @@ class PlayScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     var heroInfo = HeroStats()
     
     override func didMove(to view: SKView) {
+        SoundPlayer.sharedHelper.playBackgroundMusic()
         heroInfo = HeroStats.SIHero
         heroInfo.updateStats()
         bg.size.height = self.size.height

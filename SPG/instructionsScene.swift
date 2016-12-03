@@ -24,7 +24,7 @@ class InstructionScene: SKScene {
     // the inti
     override func didMove(to view: SKView) {
         
-
+SoundPlayer.sharedHelper.playBackgroundMusic()
         
         self.playButton.position = CGPoint(x: self.frame.midX * 1.5,y: self.frame.midY * 0.35)
         self.addChild(self.playButton)

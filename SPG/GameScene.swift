@@ -18,7 +18,7 @@ class GameScene: SKScene {
     let Title = SKLabelNode(fontNamed: "Chalkduster")
     
     override func didMove(to view: SKView) {
-        
+        SoundPlayer.sharedHelper.playBackgroundMusic()
         //Mark: setting up the ground stuff
         //self.bg.anchorPoint = CGPoint(x: 0.5,y: 0.5)
         bg.size.height = self.size.height

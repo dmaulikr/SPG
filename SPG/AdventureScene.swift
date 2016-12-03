@@ -96,7 +96,7 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         self.enemHPTl.position = CGPoint(x: (self.frame.midX + self.frame.maxX) / 2, y: self.frame.midY + hero.size.height * 0.9)
         self.enemHPTl.zPosition = 1
         
-        self.InventoryTl.text = "Adventure Time \(heroInfo.currHealth)"
+        self.InventoryTl.text = "Adventure Time Level:\(Adventure.levelCount)"
         self.InventoryTl.fontSize = 72
         self.InventoryTl.fontColor  = UIColor.orange
         self.InventoryTl.position = CGPoint(x: self.frame.midX, y: (self.frame.maxY + self.frame.midY) / 2)
@@ -148,7 +148,7 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 }
                 else
                 {
-                    InventoryTl.text = "Could not run away \(heroInfo.currHealth)"
+                    InventoryTl.text = "Could not run away "
                     heroInfo.gotAttacked(incAttack: currEnemy.currAttack)
                     isHeroDead()
                 }
@@ -163,7 +163,10 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 if (randomRange(min: 0, max: 1) == 1)
                 {
                     heroInfo.gotAttacked(incAttack: currEnemy.currAttack)
+                    
+                    
                     currEnemy.gotAttacked(incAttack: heroInfo.currAttack)
+                    
                     
                     isHeroDead()
                     isEnemyDead()
@@ -174,8 +177,12 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 else
                 {
                     currEnemy.gotAttacked(incAttack: heroInfo.currAttack)
+                    
+                    
                     isHeroDead()
                     heroInfo.gotAttacked(incAttack: currEnemy.currAttack)
+                    
+                    
                     isEnemyDead()
                     
                     //InventoryTl.text = "HP \(Double(round(100 * heroInfo.currHealth)/100)) E: \(Double(round(100 * currEnemy.currHealth)/100)) "

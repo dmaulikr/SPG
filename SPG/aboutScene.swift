@@ -16,7 +16,7 @@ import SpriteKit
 // The about page
 class AboutScene: SKScene {
     
-    
+
     // all the buttons YEEEEEEEEEEEEE
     let backButton = SKSpriteNode(imageNamed:"back")
     let playButton = SKSpriteNode(imageNamed:"play")
@@ -29,7 +29,7 @@ class AboutScene: SKScene {
     
     // the init
     override func didMove(to view: SKView) {
-        
+        //SoundPlayer.sharedHelper.playBackgroundMusic()
 
         
         self.playButton.position = CGPoint(x: self.frame.midX * 1.5,y: self.frame.midY * 0.35)
