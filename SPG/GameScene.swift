@@ -54,7 +54,7 @@ class GameScene: SKScene {
             let location = touch.location(in: self)
             // all the difrent buttons
             if self.atPoint(location) == self.playButton{
-                let scene = PlayScene(size: self.size)
+                let scene = MainMenuScene(size: self.size)
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill

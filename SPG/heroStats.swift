@@ -17,14 +17,18 @@ class HeroStats {
     var currHealth = Double(0)
     var currAttack = Double(0)
     var currDefense = Double(0)
+    var currSpeed = Double(0)
     
     var baseHealth = Double(0)
     var baseAttack = Double(0)
     var baseDefense = Double(0)
+    var baseSpeed = Double(0)
     
     var level = Double(0)
     var currEXP = Double(0)
     var needEXP = Double(0)
+    
+    var gold = Int32(0)
     
     var item1 = Items()
     var item2 = Items()
@@ -53,9 +57,9 @@ class HeroStats {
         startItem2.changeColor(nColor: UIColor.blue)
         startItem3.changeColor(nColor: UIColor.blue)
         
-        startItem1.setStats(nName: "Shitty Sword", nHealth: 1, nAttack: 0, nDefense: 0)
-        startItem2.setStats(nName: "Shitty Sword 2", nHealth: 0, nAttack: 1, nDefense: 0)
-        startItem3.setStats(nName: "Shitty Sword 3", nHealth: 0, nAttack: 0, nDefense: 1)
+        startItem1.setStats(nName: "Shitty Sword", nHealth: 1, nAttack: 0, nDefense: 0,nSpeed: 0)
+        startItem2.setStats(nName: "Shitty Sword 2", nHealth: 0, nAttack: 1, nDefense: 0,nSpeed: 0)
+        startItem3.setStats(nName: "Shitty Sword 3", nHealth: 0, nAttack: 0, nDefense: 1,nSpeed: 0)
         
         equipItem(whichSlot: 1, newItem: startItem1)
         equipItem(whichSlot: 2, newItem: startItem2)

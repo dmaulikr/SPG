@@ -13,7 +13,10 @@ class Items {
     var attack = Double(0)
     var defense = Double(0)
     var health = Double(0)
+    var speed = Double(0)
     var name = String()
+
+    var rarity = String("Rare")
     var xSize = Double(0)
     var ySize = Double(0)
     var xPos = Double(0)
@@ -21,8 +24,9 @@ class Items {
     
     var itemNode = SKShapeNode()
     var itemPos = CGPoint()
+    var description : String
     
-    
+    var itemLevel : Int
     
     func setPositons (xP: Double,yP: Double)
     {
@@ -44,12 +48,13 @@ class Items {
         itemNode.fillColor = nColor
     }
     
-    func setStats(nName: String,nHealth:Double, nAttack: Double,nDefense: Double)
+    func setStats(nName: String,nHealth:Double, nAttack: Double,nDefense: Double,nSpeed: Double)
     {
         self.name = nName
         self.attack = nAttack
         self.defense = nDefense
         self.health = nHealth
+        self.speed = nSpeed
     }
     
     init()
@@ -58,9 +63,14 @@ class Items {
         xSize = Double(80)
         ySize = Double(80)
         self.name = "Sword"
+        self.rarity = "Rare"
+        self.itemLevel = 12
         self.attack = 69
         self.defense = 69
         self.health = 69
+        self.speed = 69
+        self.description = " "
+        self.itemLevel = 1
     }
     
 }
