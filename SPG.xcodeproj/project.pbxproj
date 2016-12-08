@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F378FC61DE69DB6006211AB /* PlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FC51DE69DB6006211AB /* PlayScene.swift */; };
+		3F378FC61DE69DB6006211AB /* InventoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FC51DE69DB6006211AB /* InventoryScene.swift */; };
 		3F378FCA1DE6AADC006211AB /* heroStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FC91DE6AADC006211AB /* heroStats.swift */; };
 		3F378FCD1DE6AD44006211AB /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FCC1DE6AD44006211AB /* Items.swift */; };
 		3F378FCF1DE6BF08006211AB /* enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FCE1DE6BF08006211AB /* enemy.swift */; };
@@ -32,10 +32,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3F378FC51DE69DB6006211AB /* PlayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayScene.swift; sourceTree = "<group>"; };
+		3F378FC51DE69DB6006211AB /* InventoryScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryScene.swift; sourceTree = "<group>"; };
 		3F378FC91DE6AADC006211AB /* heroStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = heroStats.swift; sourceTree = "<group>"; };
 		3F378FCC1DE6AD44006211AB /* Items.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
-		3F378FCE1DE6BF08006211AB /* enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = enemy.swift; path = SPG/enemy.swift; sourceTree = "<group>"; };
+		3F378FCE1DE6BF08006211AB /* enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enemy.swift; sourceTree = "<group>"; };
 		3F378FD01DEFF32B006211AB /* inventory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inventory.swift; sourceTree = "<group>"; };
 		3F378FD21DF123BE006211AB /* AdventureScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureScene.swift; sourceTree = "<group>"; };
 		3F378FD41DF13141006211AB /* Adventure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Adventure.swift; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				3F38624C1DE67BA30071472C /* GameScene.swift */,
-				3F378FC51DE69DB6006211AB /* PlayScene.swift */,
+				3F378FC51DE69DB6006211AB /* InventoryScene.swift */,
 				3F378FD21DF123BE006211AB /* AdventureScene.swift */,
 				3F378FD61DF239CC006211AB /* aboutScene.swift */,
 				3F378FD81DF23B2D006211AB /* instructionsScene.swift */,
@@ -85,6 +85,7 @@
 		3F378FCB1DE6AD13006211AB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3F378FCE1DE6BF08006211AB /* enemy.swift */,
 				3F378FC91DE6AADC006211AB /* heroStats.swift */,
 				3F378FCC1DE6AD44006211AB /* Items.swift */,
 				3F378FD01DEFF32B006211AB /* inventory.swift */,
@@ -107,7 +108,6 @@
 		3F38623A1DE67BA30071472C = {
 			isa = PBXGroup;
 			children = (
-				3F378FCE1DE6BF08006211AB /* enemy.swift */,
 				3F3862451DE67BA30071472C /* SPG */,
 				3F3862441DE67BA30071472C /* Products */,
 			);
@@ -226,7 +226,7 @@
 				3F378FD91DF23B2D006211AB /* instructionsScene.swift in Sources */,
 				3F378FCA1DE6AADC006211AB /* heroStats.swift in Sources */,
 				3F378FCF1DE6BF08006211AB /* enemy.swift in Sources */,
-				3F378FC61DE69DB6006211AB /* PlayScene.swift in Sources */,
+				3F378FC61DE69DB6006211AB /* InventoryScene.swift in Sources */,
 				3F378FCD1DE6AD44006211AB /* Items.swift in Sources */,
 				3F378FD51DF13141006211AB /* Adventure.swift in Sources */,
 				3F378FE41DF888D6006211AB /* MainMenuScene.swift in Sources */,

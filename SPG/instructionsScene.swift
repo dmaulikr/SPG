@@ -91,7 +91,7 @@ SoundPlayer.sharedHelper.playBackgroundMusic()
 
             
             if self.atPoint(location) == self.playButton{
-                let scene = PlayScene(size: self.size)
+                let scene = InventoryScene(size: self.size)
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill

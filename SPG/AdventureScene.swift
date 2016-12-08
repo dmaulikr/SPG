@@ -138,7 +138,7 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 
                 if (randomRange(min: 0, max: 2) == 1)
                 {
-                    let scene = PlayScene(size: self.size)
+                    let scene = InventoryScene(size: self.size)
                     let skView = self.view! as SKView
                     skView.ignoresSiblingOrder = true
                     scene.scaleMode = .resizeFill
@@ -200,7 +200,7 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         {
             heroInfo.currEXP = 0
             Adventure.sharedInst = Adventure(lvl: Double(Adventure.levelCount))
-            let scene = PlayScene(size: self.size)
+            let scene = InventoryScene(size: self.size)
             let skView = self.view! as SKView
             skView.ignoresSiblingOrder = true
             scene.scaleMode = .resizeFill
@@ -230,7 +230,7 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 
                 Inventory.SIinven.addItem(nItem: rewardItem)
                 self.InventoryTl.text = "You won\(heroInfo.currHealth)"
-                let scene = PlayScene(size: self.size)
+                let scene = InventoryScene(size: self.size)
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill

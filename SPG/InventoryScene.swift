@@ -1,15 +1,17 @@
 //
-//  MainMenuScene.swift
+//  PlayScene.swift
 //  SPG
 //
-//  Created by Student on 2016-12-07.
+//  Created by Student on 2016-11-23.
 //  Copyright © 2016 WestNet. All rights reserved.
 //
 
-import Foundation
+
 import SpriteKit
-class MainMenuScene : SKScene {
-    
+
+// This is the games scene and all that jazz
+class InventoryScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
+{
     // Font Sizes
     let sceneTitleSize = CGFloat(72)
     let informationTitleSize = CGFloat(32)
@@ -24,28 +26,16 @@ class MainMenuScene : SKScene {
     var spaceBetweenItemInfoY = CGFloat(0)
     var spaceBetweenItemInfoX = CGFloat(0)
     
-    // Background images and all that
+    let maxItemsOnPage = Int32(20)
+    
+    // The Background
     let bg = SKSpriteNode(imageNamed:"bg")
     
-    // Buttons and all that fun stuff
-    let inventoryButton = SKSpriteNode(imageNamed:"play")
-    let shopButton = SKSpriteNode(imageNamed:"about")
-    let reagantButton = SKSpriteNode(imageNamed:"tutoriel")
-    let upgradeButton = SKSpriteNode(imageNamed:"leaderboard")
-    let trainButton = SKSpriteNode(imageNamed:"tutoriel")
-    let adventureButton = SKSpriteNode(imageNamed:"leaderboard")
+    // The hero / Square
+    let hero = SKSpriteNode(imageNamed:"square")
     
-    // Labels and all that fun stuff
-    let Title = SKLabelNode(fontNamed: "Chalkduster")
-    let goldTl = SKLabelNode(fontNamed: "Chalkduster")
-    // These are the character labels and all that
-    let CharacterTl = SKLabelNode(fontNamed: "Chalkduster")
-    let CharacterHPTl = SKLabelNode(fontNamed: "Chalkduster")
-    let CharacterAttTl = SKLabelNode(fontNamed: "Chalkduster")
-    let CharacterDefTl = SKLabelNode(fontNamed: "Chalkduster")
-    let CharacterSpdTl = SKLabelNode(fontNamed: "Chalkduster")
-    let CharacterLvlTl = SKLabelNode(fontNamed: "Chalkduster")
-    let CharacterExpTl = SKLabelNode(fontNamed: "Chalkduster")
+    // Title of the screen
+    let InventoryTl = SKLabelNode(fontNamed: "Chalkduster")
     
     // These are all the labels for the players Items and all the fun stuff WEEE
     let Item1Tl = SKLabelNode(fontNamed: "Chalkduster")
@@ -79,114 +69,143 @@ class MainMenuScene : SKScene {
     let Item3LvlTl = SKLabelNode(fontNamed: "Chalkduster")
     let Item3DescTl = SKLabelNode(fontNamed: "Chalkduster")
     
-    // The hero / Square
-    let hero = SKSpriteNode(imageNamed:"square")
-    
+    // These are for all the selected Item stats and all that Jazz
+    let ItemTl = SKLabelNode(fontNamed: "Chalkduster")
+    let ItemHPTl = SKLabelNode(fontNamed: "Chalkduster")
+    let ItemAttTl = SKLabelNode(fontNamed: "Chalkduster")
+    let ItemDefTl = SKLabelNode(fontNamed: "Chalkduster")
+    let ItemSpdTl = SKLabelNode(fontNamed: "Chalkduster")
+    let ItemRarityTl = SKLabelNode(fontNamed: "Chalkduster")
+    let ItemLvlTl = SKLabelNode(fontNamed: "Chalkduster")
+    let ItemDescTl = SKLabelNode(fontNamed: "Chalkduster")
+    let ItemNameTl = SKLabelNode(fontNamed: "Chalkduster")
+    // Buttons on the bottom Like Adventure and leave and all that jazz
+    let mainMenuButton = SKSpriteNode(imageNamed:"play")
+    let backButton = SKSpriteNode(imageNamed:"about")
     
     var inven = Inventory.SIinven
+    
+    var baseItemPage = Int32(0)
+    
     var heroInfo = HeroStats()
     
+    var selectItemBoxY = CGFloat(0)
     
     override func didMove(to view: SKView) {
-        //MARK: this si setting the predetermined postion for the herobox
         
-        // Setting the info hero box positions and all that
-        heroInfoBoxX = (self.frame.midX )
-        heroInfoBoxY = (self.frame.maxY - inventoryButton.size.height)
-        spaceBetweenInfo = -30
         
         // Setting the Item info box postions and all that Zazz
         
         itemInfoBoxX = (self.frame.midX / 4)
-        itemInfoBoxY = (self.frame.midY - 100)
+        itemInfoBoxY = (self.frame.midY - 160)
         spaceBetweenItemInfoY = -30
         spaceBetweenItemInfoX = (self.frame.midX / 2)
         
+        selectItemBoxY = (self.frame.maxY - 40)
         
-        //Setting up the Hero
+        SoundPlayer.sharedHelper.playBackgroundMusic()
         heroInfo = HeroStats.SIHero
         heroInfo.updateStats()
-        SoundPlayer.sharedHelper.playBackgroundMusic()
-        //Mark: setting up the ground stuff
-        //self.bg.anchorPoint = CGPoint(x: 0.5,y: 0.5)
         bg.size.height = self.size.height
         bg.size.width = self.size.width
         self.bg.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
         self.bg.zPosition = 0
         
+        self.hero.position = CGPoint(x: self.frame.midX / 4,y: self.frame.midY)
+        self.hero.zPosition = 1
+        
+        
+        // This is for the selected Items and all that Fun stuff
+        self.ItemTl.text = "Selected Item Stats"
+        self.ItemTl.fontSize = 32
+        self.ItemTl.fontColor  = UIColor.orange
+        self.ItemTl.position = CGPoint(x: itemInfoBoxX + 50, y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 0))
+        self.ItemTl.zPosition = 1
+        
+        self.ItemNameTl.text = "Name: "
+        self.ItemNameTl.fontSize = 24
+        self.ItemNameTl.fontColor  = UIColor.orange
+        self.ItemNameTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 1))
+        self.ItemNameTl.zPosition = 1
+        
+        self.ItemHPTl.text = "Health: 0"
+        self.ItemHPTl.fontSize = 24
+        self.ItemHPTl.fontColor  = UIColor.orange
+        self.ItemHPTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 2))
+        self.ItemHPTl.zPosition = 1
+        
+        self.ItemAttTl.text = "Attack: 0"
+        self.ItemAttTl.fontSize = 24
+        self.ItemAttTl.fontColor  = UIColor.orange
+        self.ItemAttTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 3))
+        self.ItemAttTl.zPosition = 1
+        
+        self.ItemDefTl.text = "Defense: 0"
+        self.ItemDefTl.fontSize = 24
+        self.ItemDefTl.fontColor  = UIColor.orange
+        self.ItemDefTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 4))
+        self.ItemDefTl.zPosition = 1
+        
+        self.ItemRarityTl.text = "Rarity: "
+        self.ItemRarityTl.fontSize = 24
+        self.ItemRarityTl.fontColor  = UIColor.orange
+        self.ItemRarityTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 5))
+        self.ItemRarityTl.zPosition = 1
+        
+        self.ItemLvlTl.text = "Item Level: "
+        self.ItemLvlTl.fontSize = 24
+        self.ItemLvlTl.fontColor  = UIColor.orange
+        self.ItemLvlTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 6))
+        self.ItemLvlTl.zPosition = 1
+        
+        self.ItemDescTl.text = "Description: "
+        self.ItemDescTl.fontSize = 24
+        self.ItemDescTl.fontColor  = UIColor.orange
+        self.ItemDescTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 7))
+        self.ItemDescTl.zPosition = 1
+        
         
         //MARK: Button positions
-        self.inventoryButton.position = CGPoint(x: self.frame.maxX - (inventoryButton.size.width / 2) ,y: self.frame.maxY - (inventoryButton.size.height * 1))
-        inventoryButton.zPosition = 1
+        self.mainMenuButton.position = CGPoint(x: self.frame.maxX - (mainMenuButton.size.width / 2),y: self.frame.minY + mainMenuButton.size.height / 2)
+        mainMenuButton.zPosition = 1
         
-        self.shopButton.position = CGPoint(x: self.frame.maxX - (shopButton.size.width / 2) ,y: self.frame.maxY - (shopButton.size.height * 2))
-        shopButton.zPosition = 1
+        self.backButton.position = CGPoint(x: self.frame.minX + (backButton.size.width / 2),y: self.frame.minY + backButton.size.height / 2)
+        backButton.zPosition = 1
         
-        self.reagantButton.position = CGPoint(x: self.frame.maxX - (reagantButton.size.width / 2) ,y: self.frame.maxY - (reagantButton.size.height * 3))
-        reagantButton.zPosition = 1
-        
-        self.upgradeButton.position = CGPoint(x: self.frame.maxX - (upgradeButton.size.width / 2) ,y: self.frame.maxY - (upgradeButton.size.height * 4))
-        upgradeButton.zPosition = 1
-        
-        self.trainButton.position = CGPoint(x: self.frame.maxX - (trainButton.size.width / 2) ,y: self.frame.maxY - (trainButton.size.height * 5))
-        trainButton.zPosition = 1
-        
-        self.adventureButton.position = CGPoint(x: self.frame.maxX - (adventureButton.size.width / 2),y: self.frame.maxY - adventureButton.size.height * 6)
-        adventureButton.zPosition = 1
+        //MARK: Drawing the inventory and all that jazz
+        var i: Double
+        i = 0
+        var j: Double
+        j = 0
+        var totalCounter: Int32
+        totalCounter = 0
         
         
-        //MARK: Label positions
-        self.Title.text = "Your Shape"
-        self.Title.fontSize = sceneTitleSize
-        self.Title.fontColor  = UIColor.orange
-        self.Title.position = CGPoint(x: heroInfoBoxX, y: self.frame.maxY + self.Title.fontSize)
-        self.Title.zPosition = 1
+        for item  in inven.itemList
+        {
+            if ((baseItemPage * 20) < totalCounter)
+            {
+                item.setPositons(xP: Double(self.frame.midX) + ((item.xSize + 20) * (i)), yP: ((Double(self.frame.maxY) - item.xSize * 2) + (item.xSize + 20)) - (item.xSize + 20) * j )
+                i = i + 1
+                self.addChild(item.itemNode)
+            }
+            totalCounter = totalCounter + 1
+            
+            if (i == 5)
+            {
+                j = j + 1
+                i = 0
+            }
+            if (j == 4)
+            {
+                break
+            }
+        }
+        self.re
         
-        self.CharacterTl.text = "Hero Stats"
-        self.CharacterTl.fontSize = informationTitleSize
-        self.CharacterTl.fontColor  = UIColor.orange
-        self.CharacterTl.position = CGPoint(x: heroInfoBoxX, y:  heroInfoBoxY )
-        self.CharacterTl.zPosition = 1
-        
-        self.CharacterLvlTl.text = "Level: \(heroInfo.level)"
-        self.CharacterLvlTl.fontSize = informationSize
-        self.CharacterLvlTl.fontColor  = UIColor.orange
-        self.CharacterLvlTl.position = CGPoint(x: heroInfoBoxX, y: heroInfoBoxY + (spaceBetweenInfo * 1))
-        self.CharacterLvlTl.zPosition = 1
-        
-        self.CharacterExpTl.text = "EXP: \(heroInfo.currEXP) / \(heroInfo.needEXP)"
-        self.CharacterExpTl.fontSize = informationSize
-        self.CharacterExpTl.fontColor  = UIColor.orange
-        self.CharacterExpTl.position = CGPoint(x: heroInfoBoxX, y: heroInfoBoxY + (spaceBetweenInfo * 2))
-        self.CharacterExpTl.zPosition = 1
-        
-        self.CharacterHPTl.text = "Health: \(Double(round(100 * heroInfo.currHealth)/100))"
-        self.CharacterHPTl.fontSize = informationSize
-        self.CharacterHPTl.fontColor  = UIColor.orange
-        self.CharacterHPTl.position = CGPoint(x: heroInfoBoxX, y: heroInfoBoxY + (spaceBetweenInfo * 3))
-        self.CharacterHPTl.zPosition = 1
-        
-        self.CharacterAttTl.text = "Attack: \(Double(round(100 * heroInfo.currAttack)/100))"
-        self.CharacterAttTl.fontSize = informationSize
-        self.CharacterAttTl.fontColor  = UIColor.orange
-        self.CharacterAttTl.position = CGPoint(x: heroInfoBoxX, y: heroInfoBoxY + (spaceBetweenInfo * 4))
-        self.CharacterAttTl.zPosition = 1
-        
-        self.CharacterDefTl.text = "Defense: \(Double(round(100 * heroInfo.currDefense)/100))"
-        self.CharacterDefTl.fontSize = informationSize
-        self.CharacterDefTl.fontColor  = UIColor.orange
-        self.CharacterDefTl.position = CGPoint(x: heroInfoBoxX, y: heroInfoBoxY + (spaceBetweenInfo * 5))
-        self.CharacterDefTl.zPosition = 1
-        
-        self.CharacterSpdTl.text = "Speed: \(Double(round(100 * heroInfo.currSpeed)/100))"
-        self.CharacterSpdTl.fontSize = informationSize
-        self.CharacterSpdTl.fontColor  = UIColor.orange
-        self.CharacterSpdTl.position = CGPoint(x: heroInfoBoxX, y: heroInfoBoxY + (spaceBetweenInfo * 6))
-        self.CharacterSpdTl.zPosition = 1
-        
-        //MARK: Hero postion
-        self.hero.position = CGPoint(x: self.frame.midX / 2,y: heroInfoBoxY + (spaceBetweenInfo * 2))
-        self.hero.zPosition = 1
+        //MARK: Adding player Items
+        // The first Item and all that fun stuff
+        heroInfo.item1.setPositons(xP: Double(self.frame.midX) + ((heroInfo.item1.xSize + 20) * (0)), yP: (Double(self.frame.midY) + (heroInfo.item1.xSize + 20)) - (heroInfo.item1.xSize + 20) * 3 )
         
         //MARK: Player Items Positions
         // Item 1
@@ -240,6 +259,7 @@ class MainMenuScene : SKScene {
         self.Item1DescTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y: itemInfoBoxY + (spaceBetweenItemInfoY * 7))
         self.Item1DescTl.zPosition = 1
         
+        // ITem 2
         heroInfo.item2.setPositons(xP: Double(itemInfoBoxX  +   (spaceBetweenItemInfoX * 1)) , yP: (Double(itemInfoBoxY) + heroInfo.item2.ySize) )
         
         // The labels and all that
@@ -291,7 +311,6 @@ class MainMenuScene : SKScene {
         self.Item2DescTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 1), y: itemInfoBoxY + (spaceBetweenItemInfoY * 7))
         self.Item2DescTl.zPosition = 1
         
-        
         heroInfo.item3.setPositons(xP: Double(itemInfoBoxX  + (spaceBetweenItemInfoX * 2)), yP: (Double(itemInfoBoxY) + heroInfo.item3.ySize) )
         // The labels and all that
         self.Item3Tl.text = heroInfo.item3.name
@@ -342,25 +361,12 @@ class MainMenuScene : SKScene {
         self.Item3DescTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 2), y: itemInfoBoxY + (spaceBetweenItemInfoY * 7))
         self.Item3DescTl.zPosition = 1
         
-        //MARK: adding Children
-        self.addChild(self.bg)
         
-        // Adding the hero
-        self.addChild(self.hero)
+        heroInfo.item1.changeColor(nColor: UIColor.green)
+        heroInfo.item2.changeColor(nColor: UIColor.green)
         
-        // All the hero information and all that jazz
-        self.addChild(self.CharacterTl)
-        self.addChild(self.CharacterHPTl)
-        self.addChild(self.CharacterAttTl)
-        self.addChild(self.CharacterDefTl)
-        self.addChild(self.CharacterLvlTl)
-        self.addChild(self.CharacterExpTl)
-        self.addChild(self.CharacterSpdTl)
+        heroInfo.item3.changeColor(nColor: UIColor.green)
         
-        // The heros items and all that
-        self.addChild(self.heroInfo.item1.itemNode)
-        self.addChild(self.heroInfo.item2.itemNode)
-        self.addChild(self.heroInfo.item3.itemNode)
         // The Heros Items Stats and all thatjazz
         // Items 1
         self.addChild(self.Item1Tl)
@@ -390,62 +396,43 @@ class MainMenuScene : SKScene {
         self.addChild(self.Item3LvlTl)
         self.addChild(self.Item3DescTl)
         
-        // The buttons
-        self.addChild(self.inventoryButton)
-        self.addChild(self.shopButton)
-        self.addChild(self.reagantButton)
-        self.addChild(self.upgradeButton)
-        self.addChild(self.trainButton)
-        self.addChild(self.adventureButton)
+        self.addChild(self.heroInfo.item1.itemNode)
+        self.addChild(self.heroInfo.item2.itemNode)
+        self.addChild(self.heroInfo.item3.itemNode)
+        
+        self.addChild(self.ItemTl)
+        self.addChild(self.ItemNameTl)
+        self.addChild(self.ItemHPTl)
+        self.addChild(self.ItemAttTl)
+        self.addChild(self.ItemDefTl)
+        self.addChild(self.ItemSpdTl)
+        self.addChild(self.ItemRarityTl)
+        self.addChild(self.ItemLvlTl)
+        self.addChild(self.ItemDescTl)
+        
+        
+        // self.addChild(self.InventoryTl)
+        self.addChild(self.bg)
+        self.addChild(self.hero)
+        
+        self.addChild(self.mainMenuButton)
+        
         
     }
-    
+    //MARK: Touches Began
+    var itemSwap = Items()
+    var itemSwapper = false
+    var itemNum = 0
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         for touch : AnyObject in touches {
             let location = touch.location(in: self)
-            // all the difrent buttons
-            if self.atPoint(location) == self.inventoryButton{
-                let scene = InventoryScene(size: self.size)
-                let skView = self.view! as SKView
-                skView.ignoresSiblingOrder = true
-                scene.scaleMode = .resizeFill
-                scene.size = skView.bounds.size
-                skView.presentScene(scene)
-            }
-            if self.atPoint(location) == self.shopButton{
-                let scene = AboutScene(size: self.size)
-                let skView = self.view! as SKView
-                skView.ignoresSiblingOrder = true
-                scene.scaleMode = .resizeFill
-                scene.size = skView.bounds.size
-                skView.presentScene(scene)
-            }
-            if self.atPoint(location) == self.reagantButton{
-                let scene = InstructionScene(size: self.size)
-                let skView = self.view! as SKView
-                skView.ignoresSiblingOrder = true
-                scene.scaleMode = .resizeFill
-                scene.size = skView.bounds.size
-                skView.presentScene(scene)
-            }
-            if self.atPoint(location) == self.upgradeButton{
-                let scene = InstructionScene(size: self.size)
-                let skView = self.view! as SKView
-                skView.ignoresSiblingOrder = true
-                scene.scaleMode = .resizeFill
-                scene.size = skView.bounds.size
-                skView.presentScene(scene)
-            }
-            if self.atPoint(location) == self.trainButton{
-                let scene = InstructionScene(size: self.size)
-                let skView = self.view! as SKView
-                skView.ignoresSiblingOrder = true
-                scene.scaleMode = .resizeFill
-                scene.size = skView.bounds.size
-                skView.presentScene(scene)
-            }
-            if self.atPoint(location) == self.adventureButton{
-                let scene = InstructionScene(size: self.size)
+            
+            
+            //MARK: Main Menu Button
+            if self.atPoint(location) == self.mainMenuButton{
+                let scene = AdventureScene(size: self.size)
+                HeroStats.SIHero = heroInfo
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill
@@ -453,13 +440,135 @@ class MainMenuScene : SKScene {
                 skView.presentScene(scene)
             }
             
+            if self.atPoint(location) == self.heroInfo.item1.itemNode{
+                heroInfo.item1.changeColor(nColor: UIColor.black)
+                
+                heroInfo.item3.changeColor(nColor: UIColor.green)
+                heroInfo.item2.changeColor(nColor: UIColor.green)
+                
+                if (itemSwapper == true)
+                {
+                    inven.itemList[itemNum].name = heroInfo.item1.name
+                    inven.itemList[itemNum].attack = heroInfo.item1.attack
+                    inven.itemList[itemNum].defense = heroInfo.item1.defense
+                    inven.itemList[itemNum].health = heroInfo.item1.health
+                    itemSwapper = false
+                    heroInfo.item1.name = itemSwap.name
+                    heroInfo.item1.attack = itemSwap.attack
+                    heroInfo.item1.defense = itemSwap.defense
+                    heroInfo.item1.health = itemSwap.health
+                    itemNum = -1
+                    heroInfo.updateStats()
+                    //self.CharacterHPTl.text = "Health: \(heroInfo.currHealth)"
+                    //self.CharacterAttTl.text = "Attack: \(heroInfo.currAttack)"
+                    // self.CharacterDefTl.text = "Defense: \(heroInfo.currDefense)"
+                    
+                }
+                self.ItemHPTl.text = "Health: \(heroInfo.item1.health)"
+                self.ItemAttTl.text = "Attack: \(heroInfo.item1.attack)"
+                self.ItemDefTl.text = "Defense: \(heroInfo.item1.defense)"
+                self.ItemNameTl.text = "Name: \(heroInfo.item1.name)"
+            }
+            
+            if self.atPoint(location) == self.heroInfo.item2.itemNode{
+                heroInfo.item2.changeColor(nColor: UIColor.black)
+                
+                heroInfo.item1.changeColor(nColor: UIColor.green)
+                heroInfo.item3.changeColor(nColor: UIColor.green)
+                
+                if (itemSwapper == true)
+                {
+                    inven.itemList[itemNum].name = heroInfo.item2.name
+                    inven.itemList[itemNum].attack = heroInfo.item2.attack
+                    inven.itemList[itemNum].defense = heroInfo.item2.defense
+                    inven.itemList[itemNum].health = heroInfo.item2.health
+                    itemSwapper = false
+                    heroInfo.item2.name = itemSwap.name
+                    heroInfo.item2.attack = itemSwap.attack
+                    heroInfo.item2.defense = itemSwap.defense
+                    heroInfo.item2.health = itemSwap.health
+                    itemNum = -1
+                    heroInfo.updateStats()
+                    //self.CharacterHPTl.text = "Health: \(heroInfo.currHealth)"
+                    //self.CharacterAttTl.text = "Attack: \(heroInfo.currAttack)"
+                    // self.CharacterDefTl.text = "Defense: \(heroInfo.currDefense)"
+                }
+                self.ItemHPTl.text = "Health: \(heroInfo.item2.health)"
+                self.ItemAttTl.text = "Attack: \(heroInfo.item2.attack)"
+                self.ItemDefTl.text = "Defense: \(heroInfo.item2.defense)"
+                self.ItemNameTl.text = "Name: \(heroInfo.item2.name)"
+            }
+            
+            if self.atPoint(location) == self.heroInfo.item3.itemNode{
+                heroInfo.item3.changeColor(nColor: UIColor.black)
+                
+                heroInfo.item1.changeColor(nColor: UIColor.green)
+                heroInfo.item2.changeColor(nColor: UIColor.green)
+                
+                if (itemSwapper == true)
+                {
+                    inven.itemList[itemNum].name = heroInfo.item3.name
+                    inven.itemList[itemNum].attack = heroInfo.item3.attack
+                    inven.itemList[itemNum].defense = heroInfo.item3.defense
+                    inven.itemList[itemNum].health = heroInfo.item3.health
+                    itemSwapper = false
+                    heroInfo.item3.name = itemSwap.name
+                    heroInfo.item3.attack = itemSwap.attack
+                    heroInfo.item3.defense = itemSwap.defense
+                    heroInfo.item3.health = itemSwap.health
+                    itemNum = -1
+                    heroInfo.updateStats()
+                    //self.CharacterHPTl.text = "Health: \(heroInfo.currHealth)"
+                    // self.CharacterAttTl.text = "Attack: \(heroInfo.currAttack)"
+                    // self.CharacterDefTl.text = "Defense: \(heroInfo.currDefense)"
+                }
+                self.ItemHPTl.text = "Health: \(heroInfo.item3.health)"
+                self.ItemAttTl.text = "Attack: \(heroInfo.item3.attack)"
+                self.ItemDefTl.text = "Defense: \(heroInfo.item3.defense)"
+                self.ItemNameTl.text = "Name: \(heroInfo.item3.name)"
+            }
+            
+            
+            
+            var k = 0
+            for item  in inven.itemList
+            {
+                if self.atPoint(location) == item.itemNode {
+                    item.changeColor(nColor: UIColor.black)
+                    self.ItemHPTl.text = "Health: \(item.health)"
+                    self.ItemAttTl.text = "Attack: \(item.attack)"
+                    self.ItemDefTl.text = "Defense: \(item.defense)"
+                    self.ItemNameTl.text = "Name: \(item.name)"
+                    heroInfo.item1.changeColor(nColor: UIColor.green)
+                    heroInfo.item2.changeColor(nColor: UIColor.green)
+                    heroInfo.item3.changeColor(nColor: UIColor.green)
+                    
+                    itemSwap.name = item.name
+                    itemSwap.attack = item.attack
+                    itemSwap.defense = item.defense
+                    itemSwap.health = item.health
+                    itemSwapper = true
+                    itemNum = k
+                    
+                }
+                else
+                {
+                    item.changeColor(nColor: UIColor.orange)
+                    
+                }
+                k = k + 1
+                
+            }
+            
+            
         }
     }
     
-    
-    
-    
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        
+        
+        
+        
     }
+    
 }
