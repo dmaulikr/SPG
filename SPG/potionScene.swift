@@ -41,6 +41,7 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     var potionQuanTl = [SKLabelNode(fontNamed: "Chalkduster")]
     var potionEffNTl = [SKLabelNode(fontNamed: "Chalkduster")]
     var potionPriceTl = [SKLabelNode(fontNamed: "Chalkduster")]
+        var goldTl = SKLabelNode(fontNamed: "Chalkduster")
     
     var sizeSelector = Int32(1)
     var buyNode = [SKShapeNode]()
@@ -82,8 +83,8 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         buyNodeWidth = Double(self.frame.size.width / 4) - 10
         buyNodeHeight = Double(60)
         
-        incSizeNode = SKShapeNode(rectOf: CGSize(width: buyNodeWidth, height: buyNodeHeight))
-        decSizeNode = SKShapeNode(rectOf: CGSize(width: buyNodeWidth, height: buyNodeHeight))
+        incSizeNode = SKShapeNode(rectOf: CGSize(width: buyNodeWidth, height: buyNodeHeight + 30))
+        decSizeNode = SKShapeNode(rectOf: CGSize(width: buyNodeWidth, height: buyNodeHeight + 30))
         // Making 5 potion labels for the different types of potions and all that jazz
         for _ in 0...3 {
             potionNameTl.append(SKLabelNode(fontNamed: "Chalkduster"))
@@ -383,14 +384,14 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         //MARK: increas size button khjkhk
         incSizeNode.name = "incSize"
         incSizeNode.fillColor = UIColor.blue
-        incSizeNode.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)) + CGFloat((buyNodeWidth * 1.5)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - buyNodeHeight)
+        incSizeNode.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)) + CGFloat((buyNodeWidth * 1.5)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - CGFloat(buyNodeHeight + 90))
         incSizeNode.zPosition = 1
         self.addChild(incSizeNode)
         
         //MARK: dec size button
         decSizeNode.name = "incSize"
         decSizeNode.fillColor = UIColor.black
-        decSizeNode.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)) + CGFloat((buyNodeWidth / 2)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - buyNodeHeight)
+        decSizeNode.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)) + CGFloat((buyNodeWidth / 2)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - CGFloat(buyNodeHeight + 90))
         decSizeNode.zPosition = 1
         self.addChild(decSizeNode)
         
@@ -401,7 +402,13 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         self.backButton.position = CGPoint(x: self.frame.minX + (backButton.size.width / 2),y: self.frame.minY + backButton.size.height / 2)
         backButton.zPosition = 1
         
-        
+        goldTl.text = "Gold: \(inven.gold)"
+        goldTl.fontSize = 32
+        goldTl.fontColor  = UIColor.orange
+        goldTl.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        goldTl.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(2)) + (spaceBetweenPotionInfoY * 4) )
+        goldTl.zPosition = 1
+        self.addChild(goldTl)
         
         
         
@@ -442,150 +449,17 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 if (sizeSelector < 5)
                 {
                     sizeSelector = sizeSelector + 1
-                    var counter = 0
-                    for pot in potionNameTl
-                    {
-                        var tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
-                        switch counter {
-                        case 0:
-                            tempPot = potionInfoList[0]
-                        case 1:
-                            tempPot = potionInfoList[1]
-                        case 2:
-                            tempPot = potionInfoList[2]
-                        case 3:
-                            tempPot = potionInfoList[3]
-                        case 4:
-                            tempPot = potionInfoList[4]
-                        default:
-                            break
-                        }
-                        pot.text = tempPot.name
-                        counter = counter + 1
-                    }
-                    counter = 0
-                    for pot in potionEffNTl
-                    {
-                        var tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
-                        switch counter {
-                        case 0:
-                            tempPot = potionInfoList[0]
-                            pot.text = "Revives once"
-                        case 1:
-                            tempPot = potionInfoList[1]
-                            pot.text = "Heals for \(tempPot.effectNum)"
-                        case 2:
-                            tempPot = potionInfoList[2]
-                            pot.text = "Increases attack by \(tempPot.effectNum)"
-                        case 3:
-                            tempPot = potionInfoList[3]
-                            pot.text = "Increases defense by \(tempPot.effectNum)"
-                        case 4:
-                            tempPot = potionInfoList[4]
-                            pot.text = "Increases speed by \(tempPot.effectNum)"
-                        default:
-                            break
-                        }
-                        counter = counter + 1
-                    }
-                    
-                    for pot in potionPriceTl
-                    {
-                        var tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
-                        switch counter {
-                        case 0:
-                            tempPot = potionInfoList[0]
-                        case 1:
-                            tempPot = potionInfoList[1]
-                        case 2:
-                            tempPot = potionInfoList[2]
-                        case 3:
-                            tempPot = potionInfoList[3]
-                        case 4:
-                            tempPot = potionInfoList[4]
-                        default:
-                            break
-                        }
-                        
-                        pot.text = "Buy: \(tempPot.buyPrice) Sell: \(tempPot.sellPrice)"
-                    }
+updateText()
                 }
                 
             }
             
             //MARK: desc size
             if self.atPoint(location) == self.decSizeNode{
-                if (sizeSelector > 0)
+                if (sizeSelector > 1)
                 {
                     sizeSelector = sizeSelector - 1
-                    var counter = 0
-                    for pot in potionNameTl
-                    {
-                        var tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
-                        switch counter {
-                        case 0:
-                            tempPot = potionInfoList[0]
-                        case 1:
-                            tempPot = potionInfoList[1]
-                        case 2:
-                            tempPot = potionInfoList[2]
-                        case 3:
-                            tempPot = potionInfoList[3]
-                        case 4:
-                            tempPot = potionInfoList[4]
-                        default:
-                            break
-                        }
-                        pot.text = tempPot.name
-                        counter = counter + 1
-                    }
-                    counter = 0
-                    for pot in potionEffNTl
-                    {
-                        var tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
-                        switch counter {
-                        case 0:
-                            tempPot = potionInfoList[0]
-                            pot.text = "Revives once"
-                        case 1:
-                            tempPot = potionInfoList[1]
-                            pot.text = "Heals for \(tempPot.effectNum)"
-                        case 2:
-                            tempPot = potionInfoList[2]
-                            pot.text = "Increases attack by \(tempPot.effectNum)"
-                        case 3:
-                            tempPot = potionInfoList[3]
-                            pot.text = "Increases defense by \(tempPot.effectNum)"
-                        case 4:
-                            tempPot = potionInfoList[4]
-                            pot.text = "Increases speed by \(tempPot.effectNum)"
-                        default:
-                            break
-                        }
-                        counter = counter + 1
-                    }
-                    
-                    for pot in potionPriceTl
-                    {
-                        var tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
-                        switch counter {
-                        case 0:
-                            tempPot = potionInfoList[0]
-                        case 1:
-                            tempPot = potionInfoList[1]
-                        case 2:
-                            tempPot = potionInfoList[2]
-                        case 3:
-                            tempPot = potionInfoList[3]
-                        case 4:
-                            tempPot = potionInfoList[4]
-                        default:
-                            break
-                        }
-                        
-                        pot.text = "Buy: \(tempPot.buyPrice) Sell: \(tempPot.sellPrice)"
-                    }
-
+                   updateText()
                 }
             }
             
@@ -593,59 +467,24 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
             var k = 0
             for buyButton  in buyNode
             {
-                var qu = 0
+  
                 if self.atPoint(location) == buyButton {
                     switch k {
                     case 0:
                         buyPot(pot: Potion(potionType: potionTypes.reDraw, size: sizeSelector))
-                        for sPot in inven.potionList
-                        {
-                            if (sPot.potionType == potionTypes.reDraw)
-                            {
-                                qu = qu + 1
-                            }
-                        }
-                        potionQuanTl[k].text = "Quantity: \(qu)"
+    updateText()
                     case 1:
                         buyPot(pot: Potion(potionType: potionTypes.reSize, size: sizeSelector))
-                        for sPot in inven.potionList
-                        {
-                            if (sPot.potionType == potionTypes.reSize)
-                            {
-                                qu = qu + 1
-                            }
-                        }
-                        potionQuanTl[k].text = "Quantity: \(qu)"
+    updateText()
                     case 2:
                         buyPot(pot: Potion(potionType: potionTypes.sharpness, size: sizeSelector))
-                        for sPot in inven.potionList
-                        {
-                            if (sPot.potionType == potionTypes.sharpness)
-                            {
-                                qu = qu + 1
-                            }
-                        }
-                        potionQuanTl[k].text = "Quantity: \(qu)"
+    updateText()
                     case 3:
                         buyPot(pot: Potion(potionType: potionTypes.boldness, size: sizeSelector))
-                        for sPot in inven.potionList
-                        {
-                            if (sPot.potionType == potionTypes.boldness)
-                            {
-                                qu = qu + 1
-                            }
-                        }
-                        potionQuanTl[k].text = "Quantity: \(qu)"
+    updateText()
                     case 4:
                         buyPot(pot: Potion(potionType: potionTypes.quickDraw, size: sizeSelector))
-                        for sPot in inven.potionList
-                        {
-                            if (sPot.potionType == potionTypes.quickDraw)
-                            {
-                                qu = qu + 1
-                            }
-                        }
-                        potionQuanTl[k].text = "Quantity: \(qu)"
+    updateText()
                     default:
                         break
                     }
@@ -667,54 +506,19 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                     switch k {
                     case 0:
                         sellPot(pot: Potion(potionType: potionTypes.reDraw, size: sizeSelector))
-                        for sPot in inven.potionList
-                        {
-                            if (sPot.potionType == potionTypes.reDraw)
-                            {
-                                q = q + 1
-                            }
-                        }
-                        potionQuanTl[k].text = "Quantity: \(q)"
+    updateText()
                     case 1:
                         sellPot(pot: Potion(potionType: potionTypes.reSize, size: sizeSelector))
-                        for sPot in inven.potionList
-                        {
-                            if (sPot.potionType == potionTypes.reSize)
-                            {
-                                q = q + 1
-                            }
-                        }
-                        potionQuanTl[k].text = "Quantity: \(q)"
+    updateText()
                     case 2:
                         sellPot(pot: Potion(potionType: potionTypes.sharpness, size: sizeSelector))
-                        for sPot in inven.potionList
-                        {
-                            if (sPot.potionType == potionTypes.sharpness)
-                            {
-                                q = q + 1
-                            }
-                        }
-                        potionQuanTl[k].text = "Quantity: \(q)"
+    updateText()
                     case 3:
                         sellPot(pot: Potion(potionType: potionTypes.boldness, size: sizeSelector))
-                        for sPot in inven.potionList
-                        {
-                            if (sPot.potionType == potionTypes.boldness)
-                            {
-                                q = q + 1
-                            }
-                        }
-                        potionQuanTl[k].text = "Quantity: \(q)"
+    updateText()
                     case 4:
                         sellPot(pot: Potion(potionType: potionTypes.quickDraw, size: sizeSelector))
-                        for sPot in inven.potionList
-                        {
-                            if (sPot.potionType == potionTypes.quickDraw)
-                            {
-                                q = q + 1
-                            }
-                        }
-                        potionQuanTl[k].text = "Quantity: \(q)"
+    updateText()
                     default:
                         break
                     }
@@ -772,6 +576,110 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         print("Gold: \(inven.gold)")
         print("Potion list count: \(inven.potionList.count)")
         
+    }
+    
+    func updateText ()
+    {
+           goldTl.text = "Gold: \(inven.gold)"
+        var counter = 0
+        for potName in potionNameTl
+        {
+            var tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
+            switch counter {
+            case 0:
+                tempPot = Potion(potionType: potionTypes.reDraw, size: sizeSelector)
+            case 1:
+                tempPot = Potion(potionType: potionTypes.reSize, size: sizeSelector)
+            case 2:
+                tempPot = Potion(potionType: potionTypes.sharpness, size: sizeSelector)
+            case 3:
+                tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
+            case 4:
+                tempPot = Potion(potionType: potionTypes.quickDraw, size: sizeSelector)
+            default:
+                break
+            }
+            potName.text = tempPot.name
+            counter = counter + 1
+        }
+        var counter2 = 0
+        for potEffN in potionEffNTl
+        {
+            var tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
+            switch counter2 {
+            case 0:
+                tempPot = Potion(potionType: potionTypes.reDraw, size: sizeSelector)
+                potEffN.text = "Revives once"
+            case 1:
+                tempPot = Potion(potionType: potionTypes.reSize, size: sizeSelector)
+                potEffN.text = "Heals for \(tempPot.effectNum)"
+            case 2:
+                tempPot = Potion(potionType: potionTypes.sharpness, size: sizeSelector)
+                potEffN.text = "Increases attack by \(tempPot.effectNum)"
+            case 3:
+                tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
+                potEffN.text = "Increases defense by \(tempPot.effectNum)"
+            case 4:
+                tempPot = Potion(potionType: potionTypes.quickDraw, size: sizeSelector)
+                potEffN.text = "Increases speed by \(tempPot.effectNum)"
+            default:
+                break
+            }
+            counter2 = counter2 + 1
+        }
+        var counter1 = 0
+        for potPrice in potionPriceTl
+        {
+            var tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
+            switch counter1 {
+            case 0:
+                tempPot = Potion(potionType: potionTypes.reDraw, size: sizeSelector)
+            case 1:
+                tempPot = Potion(potionType: potionTypes.reSize, size: sizeSelector)
+            case 2:
+                tempPot = Potion(potionType: potionTypes.sharpness, size: sizeSelector)
+            case 3:
+                tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
+            case 4:
+                tempPot = Potion(potionType: potionTypes.quickDraw, size: sizeSelector)
+            default:
+                break
+            }
+            potPrice.text = "Buy: \(tempPot.buyPrice) Sell: \(tempPot.sellPrice)"
+            counter1 = counter1 + 1
+        }
+        counter = 0
+        for pot in potionQuanTl
+        {
+            var tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
+            switch counter {
+            case 0:
+                tempPot = Potion(potionType: potionTypes.reDraw, size: sizeSelector)
+            case 1:
+                tempPot = Potion(potionType: potionTypes.reSize, size: sizeSelector)
+            case 2:
+                tempPot = Potion(potionType: potionTypes.sharpness, size: sizeSelector)
+            case 3:
+                tempPot = Potion(potionType: potionTypes.boldness, size: sizeSelector)
+            case 4:
+                tempPot = Potion(potionType: potionTypes.quickDraw, size: sizeSelector)
+            default:
+                break
+            }
+            var quant = Int32(0)
+            for sPot in inven.potionList
+            {
+                if (sPot.potionType == tempPot.potionType)
+                {
+                    if (sPot.size == tempPot.size)
+                    {
+                    quant = quant + 1
+                    }
+                }
+            }
+            pot.text = "Quantity: \(quant)"
+            counter = counter + 1
+        }
     }
     
     

@@ -58,7 +58,7 @@ class Potion {
     
     func createReDrawPot(nSize: Int32)
     {
-        self.name = "Redraw Potion \(size)"
+        self.name = "Redraw Potion \(nSize)"
         self.description = "Revives you after death."
         self.effectNum = 0
         self.size = nSize
@@ -69,7 +69,7 @@ class Potion {
     }
     func createReSizePot(nSize: Int32)
     {
-        self.name = "Resize Potion \(size)"
+        self.name = "Resize Potion \(nSize)"
         self.description = "Restores health to the player."
         self.effectNum = Double(10 * nSize)
         self.size = nSize
@@ -80,7 +80,7 @@ class Potion {
     }
     func createSharpnessPot(nSize: Int32)
     {
-        self.name = "Sharpness Potion \(size)"
+        self.name = "Sharpness Potion \(nSize)"
         self.description = "Increases the attack of the player."
         self.effectNum = Double(10 * nSize)
         self.size = nSize
@@ -91,7 +91,7 @@ class Potion {
     }
     func createBoldnessPot(nSize: Int32)
     {
-        self.name = "Boldness Potion \(size)"
+        self.name = "Boldness Potion \(nSize)"
         self.description = "Increases the defense of the player."
         self.effectNum = Double(10 * nSize)
         self.size = nSize
@@ -102,7 +102,7 @@ class Potion {
     }
     func createQuickDrawPot(nSize: Int32)
     {
-        self.name = "Quick Draw Potion \(size)"
+        self.name = "Quick Draw Potion \(nSize)"
         self.description = "Increases the speed of the player."
         self.effectNum = Double(10 * nSize)
         self.size = nSize
