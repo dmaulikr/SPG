@@ -146,22 +146,28 @@ class InventoryScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         self.ItemDefTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 4))
         self.ItemDefTl.zPosition = 1
         
+        self.ItemSpdTl.text = "Speed: 0"
+        self.ItemSpdTl.fontSize = 24
+        self.ItemSpdTl.fontColor  = UIColor.orange
+        self.ItemSpdTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 5))
+        self.ItemSpdTl.zPosition = 1
+        
         self.ItemRarityTl.text = "Rarity: "
         self.ItemRarityTl.fontSize = 24
         self.ItemRarityTl.fontColor  = UIColor.orange
-        self.ItemRarityTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 5))
+        self.ItemRarityTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 6))
         self.ItemRarityTl.zPosition = 1
         
         self.ItemLvlTl.text = "Item Level: "
         self.ItemLvlTl.fontSize = 24
         self.ItemLvlTl.fontColor  = UIColor.orange
-        self.ItemLvlTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 6))
+        self.ItemLvlTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 7))
         self.ItemLvlTl.zPosition = 1
         
         self.ItemDescTl.text = "Description: "
         self.ItemDescTl.fontSize = 24
         self.ItemDescTl.fontColor  = UIColor.orange
-        self.ItemDescTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 7))
+        self.ItemDescTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 0), y:  (selectItemBoxY) + (spaceBetweenItemInfoY * 8))
         self.ItemDescTl.zPosition = 1
         
         
@@ -201,7 +207,7 @@ class InventoryScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 break
             }
         }
-        self.re
+        
         
         //MARK: Adding player Items
         // The first Item and all that fun stuff
@@ -431,7 +437,7 @@ class InventoryScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
             
             //MARK: Main Menu Button
             if self.atPoint(location) == self.mainMenuButton{
-                let scene = AdventureScene(size: self.size)
+                let scene = MainMenuScene(size: self.size)
                 HeroStats.SIHero = heroInfo
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
@@ -439,7 +445,6 @@ class InventoryScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 scene.size = skView.bounds.size
                 skView.presentScene(scene)
             }
-            
             if self.atPoint(location) == self.heroInfo.item1.itemNode{
                 heroInfo.item1.changeColor(nColor: UIColor.black)
                 
@@ -452,22 +457,41 @@ class InventoryScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                     inven.itemList[itemNum].attack = heroInfo.item1.attack
                     inven.itemList[itemNum].defense = heroInfo.item1.defense
                     inven.itemList[itemNum].health = heroInfo.item1.health
+                    inven.itemList[itemNum].speed = heroInfo.item1.speed
+                    inven.itemList[itemNum].rarity = heroInfo.item1.rarity
+                    inven.itemList[itemNum].itemLevel = heroInfo.item1.itemLevel
+                    inven.itemList[itemNum].description = heroInfo.item1.description
                     itemSwapper = false
                     heroInfo.item1.name = itemSwap.name
                     heroInfo.item1.attack = itemSwap.attack
                     heroInfo.item1.defense = itemSwap.defense
                     heroInfo.item1.health = itemSwap.health
+                    heroInfo.item1.speed = itemSwap.speed
+                    heroInfo.item1.rarity = itemSwap.rarity
+                    heroInfo.item1.itemLevel = itemSwap.itemLevel
+                    heroInfo.item1.description = itemSwap.description
                     itemNum = -1
                     heroInfo.updateStats()
-                    //self.CharacterHPTl.text = "Health: \(heroInfo.currHealth)"
-                    //self.CharacterAttTl.text = "Attack: \(heroInfo.currAttack)"
-                    // self.CharacterDefTl.text = "Defense: \(heroInfo.currDefense)"
                     
                 }
                 self.ItemHPTl.text = "Health: \(heroInfo.item1.health)"
                 self.ItemAttTl.text = "Attack: \(heroInfo.item1.attack)"
                 self.ItemDefTl.text = "Defense: \(heroInfo.item1.defense)"
                 self.ItemNameTl.text = "Name: \(heroInfo.item1.name)"
+                self.ItemSpdTl.text = "Speed: \(heroInfo.item1.speed)"
+                self.ItemRarityTl.text = "Rarity: \(heroInfo.item1.rarity!)"
+                self.ItemLvlTl.text = "Item Level: \(heroInfo.item1.itemLevel)"
+                self.ItemDescTl.text = "Description: \(heroInfo.item1.description)"
+                
+                self.Item1Tl.text = heroInfo.item1.name
+                self.Item1HPTl.text = "Health: \(heroInfo.item1.health)"
+                self.Item1AttTl.text = "Attack: \(heroInfo.item1.attack)"
+                self.Item1DefTl.text = "Defense: \(heroInfo.item1.defense)"
+                self.Item1SpdTl.text = "Speed: \(heroInfo.item1.speed)"
+                self.Item1RarityTl.text = "Rarity: \(heroInfo.item1.rarity!)"
+                self.Item1LvlTl.text = "Item Level: \(heroInfo.item1.itemLevel)"
+                self.Item1DescTl.text = "Description: \(heroInfo.item1.description)"
+
             }
             
             if self.atPoint(location) == self.heroInfo.item2.itemNode{
@@ -482,11 +506,19 @@ class InventoryScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                     inven.itemList[itemNum].attack = heroInfo.item2.attack
                     inven.itemList[itemNum].defense = heroInfo.item2.defense
                     inven.itemList[itemNum].health = heroInfo.item2.health
+                    inven.itemList[itemNum].speed = heroInfo.item2.speed
+                    inven.itemList[itemNum].rarity = heroInfo.item2.rarity
+                    inven.itemList[itemNum].itemLevel = heroInfo.item2.itemLevel
+                    inven.itemList[itemNum].description = heroInfo.item2.description
                     itemSwapper = false
                     heroInfo.item2.name = itemSwap.name
                     heroInfo.item2.attack = itemSwap.attack
                     heroInfo.item2.defense = itemSwap.defense
                     heroInfo.item2.health = itemSwap.health
+                    heroInfo.item2.speed = itemSwap.speed
+                    heroInfo.item2.rarity = itemSwap.rarity
+                    heroInfo.item2.itemLevel = itemSwap.itemLevel
+                    heroInfo.item2.description = itemSwap.description
                     itemNum = -1
                     heroInfo.updateStats()
                     //self.CharacterHPTl.text = "Health: \(heroInfo.currHealth)"
@@ -497,12 +529,25 @@ class InventoryScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 self.ItemAttTl.text = "Attack: \(heroInfo.item2.attack)"
                 self.ItemDefTl.text = "Defense: \(heroInfo.item2.defense)"
                 self.ItemNameTl.text = "Name: \(heroInfo.item2.name)"
+                self.ItemSpdTl.text = "Speed: \(heroInfo.item2.speed)"
+                self.ItemRarityTl.text = "Rarity: \(heroInfo.item2.rarity!)"
+                self.ItemLvlTl.text = "Item Level: \(heroInfo.item2.itemLevel)"
+                self.ItemDescTl.text = "Description: \(heroInfo.item2.description)"
+                
+                self.Item2Tl.text = heroInfo.item2.name
+                self.Item2HPTl.text = "Health: \(heroInfo.item2.health)"
+                self.Item2AttTl.text = "Attack: \(heroInfo.item2.attack)"
+                self.Item2DefTl.text = "Defense: \(heroInfo.item2.defense)"
+                self.Item2SpdTl.text = "Speed: \(heroInfo.item2.speed)"
+                self.Item2RarityTl.text = "Rarity: \(heroInfo.item2.rarity!)"
+                self.Item2LvlTl.text = "Item Level: \(heroInfo.item2.itemLevel)"
+                self.Item2DescTl.text = "Description: \(heroInfo.item2.description)"
             }
             
             if self.atPoint(location) == self.heroInfo.item3.itemNode{
                 heroInfo.item3.changeColor(nColor: UIColor.black)
                 
-                heroInfo.item1.changeColor(nColor: UIColor.green)
+                heroInfo.item2.changeColor(nColor: UIColor.green)
                 heroInfo.item2.changeColor(nColor: UIColor.green)
                 
                 if (itemSwapper == true)
@@ -511,25 +556,43 @@ class InventoryScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                     inven.itemList[itemNum].attack = heroInfo.item3.attack
                     inven.itemList[itemNum].defense = heroInfo.item3.defense
                     inven.itemList[itemNum].health = heroInfo.item3.health
+                    inven.itemList[itemNum].speed = heroInfo.item3.speed
+                    inven.itemList[itemNum].rarity = heroInfo.item3.rarity
+                    inven.itemList[itemNum].itemLevel = heroInfo.item3.itemLevel
+                    inven.itemList[itemNum].description = heroInfo.item3.description
                     itemSwapper = false
                     heroInfo.item3.name = itemSwap.name
                     heroInfo.item3.attack = itemSwap.attack
                     heroInfo.item3.defense = itemSwap.defense
                     heroInfo.item3.health = itemSwap.health
+                    heroInfo.item3.speed = itemSwap.speed
+                    heroInfo.item3.rarity = itemSwap.rarity
+                    heroInfo.item3.itemLevel = itemSwap.itemLevel
+                    heroInfo.item3.description = itemSwap.description
                     itemNum = -1
                     heroInfo.updateStats()
-                    //self.CharacterHPTl.text = "Health: \(heroInfo.currHealth)"
-                    // self.CharacterAttTl.text = "Attack: \(heroInfo.currAttack)"
-                    // self.CharacterDefTl.text = "Defense: \(heroInfo.currDefense)"
                 }
                 self.ItemHPTl.text = "Health: \(heroInfo.item3.health)"
                 self.ItemAttTl.text = "Attack: \(heroInfo.item3.attack)"
                 self.ItemDefTl.text = "Defense: \(heroInfo.item3.defense)"
                 self.ItemNameTl.text = "Name: \(heroInfo.item3.name)"
+                self.ItemSpdTl.text = "Speed: \(heroInfo.item3.speed)"
+                self.ItemRarityTl.text = "Rarity: \(heroInfo.item3.rarity!)"
+                self.ItemLvlTl.text = "Item Level: \(heroInfo.item3.itemLevel)"
+                self.ItemDescTl.text = "Description: \(heroInfo.item3.description)"
+                
+                self.Item3Tl.text = heroInfo.item3.name
+                self.Item3HPTl.text = "Health: \(heroInfo.item3.health)"
+                self.Item3AttTl.text = "Attack: \(heroInfo.item3.attack)"
+                self.Item3DefTl.text = "Defense: \(heroInfo.item3.defense)"
+                self.Item3SpdTl.text = "Speed: \(heroInfo.item3.speed)"
+                self.Item3RarityTl.text = "Rarity: \(heroInfo.item3.rarity!)"
+                self.Item3LvlTl.text = "Item Level: \(heroInfo.item3.itemLevel)"
+                self.Item3DescTl.text = "Description: \(heroInfo.item3.description)"
             }
             
             
-            
+            //MARK: Inventory Item selection and all that
             var k = 0
             for item  in inven.itemList
             {
@@ -539,14 +602,22 @@ class InventoryScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                     self.ItemAttTl.text = "Attack: \(item.attack)"
                     self.ItemDefTl.text = "Defense: \(item.defense)"
                     self.ItemNameTl.text = "Name: \(item.name)"
+                    self.ItemSpdTl.text = "Speed: \(item.speed)"
+                    self.ItemRarityTl.text = "Rarity: \(item.rarity!)"
+                    self.ItemLvlTl.text = "Item Level: \(item.itemLevel)"
+                    self.ItemDescTl.text = "Description: \(item.description)"
                     heroInfo.item1.changeColor(nColor: UIColor.green)
-                    heroInfo.item2.changeColor(nColor: UIColor.green)
+                    heroInfo.item3.changeColor(nColor: UIColor.green)
                     heroInfo.item3.changeColor(nColor: UIColor.green)
                     
                     itemSwap.name = item.name
                     itemSwap.attack = item.attack
                     itemSwap.defense = item.defense
                     itemSwap.health = item.health
+                    itemSwap.speed = item.speed
+                    itemSwap.rarity = item.rarity
+                    itemSwap.itemLevel = item.itemLevel
+                    itemSwap.description = item.description
                     itemSwapper = true
                     itemNum = k
                     

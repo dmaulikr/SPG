@@ -10,13 +10,20 @@ import Foundation
 class Inventory {
     
     var itemList = [Items]()
+    var potionList = [Potion]()
+    var gold = Double(0)
     static var SIinven = Inventory()
+    
     func addItem (nItem: Items)
     {
         itemList.append(nItem)
-        
     }
     init(){
+        gold = 100
+        let tempPotion = Potion(potionType: potionTypes.sharpness, size: 1)
+        
+        potionList.append(tempPotion)
+        
         
         let tempItem = Items()
         let tempItem1 = Items()
@@ -39,7 +46,7 @@ class Inventory {
         let tempItem18 = Items()
         let tempItem19 = Items()
         let tempItem20 = Items()
-                let tempItem21 = Items()
+        let tempItem21 = Items()
         
         itemList.append(tempItem)
         itemList.append(tempItem1)

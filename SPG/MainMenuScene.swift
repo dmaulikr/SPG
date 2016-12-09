@@ -342,6 +342,8 @@ class MainMenuScene : SKScene {
         self.Item3DescTl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenItemInfoX * 2), y: itemInfoBoxY + (spaceBetweenItemInfoY * 7))
         self.Item3DescTl.zPosition = 1
         
+        
+        
         //MARK: adding Children
         self.addChild(self.bg)
         
@@ -421,7 +423,7 @@ class MainMenuScene : SKScene {
                 skView.presentScene(scene)
             }
             if self.atPoint(location) == self.reagantButton{
-                let scene = InstructionScene(size: self.size)
+                let scene = potionScene(size: self.size)
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill
@@ -437,7 +439,7 @@ class MainMenuScene : SKScene {
                 skView.presentScene(scene)
             }
             if self.atPoint(location) == self.trainButton{
-                let scene = InstructionScene(size: self.size)
+                let scene = AdventureScene(size: self.size)
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill
@@ -445,7 +447,7 @@ class MainMenuScene : SKScene {
                 skView.presentScene(scene)
             }
             if self.atPoint(location) == self.adventureButton{
-                let scene = InstructionScene(size: self.size)
+                let scene = AdventureScene(size: self.size)
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill
