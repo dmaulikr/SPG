@@ -23,6 +23,9 @@
 		3F378FE41DF888D6006211AB /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FE31DF888D6006211AB /* MainMenuScene.swift */; };
 		3F378FE61DFA59AC006211AB /* Potion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FE51DFA59AC006211AB /* Potion.swift */; };
 		3F378FE81DFA649B006211AB /* potionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FE71DFA649B006211AB /* potionScene.swift */; };
+		3F378FEA1DFB480D006211AB /* Materials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FE91DFB480D006211AB /* Materials.swift */; };
+		3F378FEC1DFB5570006211AB /* MaterialScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FEB1DFB5570006211AB /* MaterialScene.swift */; };
+		3F378FEE1DFB787C006211AB /* Upgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FED1DFB787C006211AB /* Upgrade.swift */; };
 		3F3862471DE67BA30071472C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3862461DE67BA30071472C /* AppDelegate.swift */; };
 		3F3862491DE67BA30071472C /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F3862481DE67BA30071472C /* GameScene.sks */; };
 		3F38624B1DE67BA30071472C /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F38624A1DE67BA30071472C /* Actions.sks */; };
@@ -50,6 +53,9 @@
 		3F378FE31DF888D6006211AB /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		3F378FE51DFA59AC006211AB /* Potion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Potion.swift; sourceTree = "<group>"; };
 		3F378FE71DFA649B006211AB /* potionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = potionScene.swift; sourceTree = "<group>"; };
+		3F378FE91DFB480D006211AB /* Materials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Materials.swift; sourceTree = "<group>"; };
+		3F378FEB1DFB5570006211AB /* MaterialScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialScene.swift; sourceTree = "<group>"; };
+		3F378FED1DFB787C006211AB /* Upgrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upgrade.swift; sourceTree = "<group>"; };
 		3F3862431DE67BA30071472C /* SPG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3862461DE67BA30071472C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F3862481DE67BA30071472C /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -83,6 +89,7 @@
 				3F378FD81DF23B2D006211AB /* instructionsScene.swift */,
 				3F378FE31DF888D6006211AB /* MainMenuScene.swift */,
 				3F378FE71DFA649B006211AB /* potionScene.swift */,
+				3F378FEB1DFB5570006211AB /* MaterialScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -96,6 +103,8 @@
 				3F378FD01DEFF32B006211AB /* inventory.swift */,
 				3F378FD41DF13141006211AB /* Adventure.swift */,
 				3F378FE51DFA59AC006211AB /* Potion.swift */,
+				3F378FE91DFB480D006211AB /* Materials.swift */,
+				3F378FED1DFB787C006211AB /* Upgrade.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -229,10 +238,13 @@
 				3F378FE81DFA649B006211AB /* potionScene.swift in Sources */,
 				3F38624D1DE67BA30071472C /* GameScene.swift in Sources */,
 				3F38624F1DE67BA30071472C /* GameViewController.swift in Sources */,
+				3F378FEA1DFB480D006211AB /* Materials.swift in Sources */,
+				3F378FEC1DFB5570006211AB /* MaterialScene.swift in Sources */,
 				3F378FD31DF123BE006211AB /* AdventureScene.swift in Sources */,
 				3F378FD91DF23B2D006211AB /* instructionsScene.swift in Sources */,
 				3F378FCA1DE6AADC006211AB /* heroStats.swift in Sources */,
 				3F378FCF1DE6BF08006211AB /* enemy.swift in Sources */,
+				3F378FEE1DFB787C006211AB /* Upgrade.swift in Sources */,
 				3F378FE61DFA59AC006211AB /* Potion.swift in Sources */,
 				3F378FC61DE69DB6006211AB /* InventoryScene.swift in Sources */,
 				3F378FCD1DE6AD44006211AB /* Items.swift in Sources */,

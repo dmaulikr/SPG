@@ -28,6 +28,8 @@ class Items {
     
     var itemLevel : Int
     
+    
+    
     func setPositons (xP: Double,yP: Double)
     {
         

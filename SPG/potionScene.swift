@@ -41,7 +41,7 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     var potionQuanTl = [SKLabelNode(fontNamed: "Chalkduster")]
     var potionEffNTl = [SKLabelNode(fontNamed: "Chalkduster")]
     var potionPriceTl = [SKLabelNode(fontNamed: "Chalkduster")]
-        var goldTl = SKLabelNode(fontNamed: "Chalkduster")
+    var goldTl = SKLabelNode(fontNamed: "Chalkduster")
     
     var sizeSelector = Int32(1)
     var buyNode = [SKShapeNode]()
@@ -449,7 +449,7 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 if (sizeSelector < 5)
                 {
                     sizeSelector = sizeSelector + 1
-updateText()
+                    updateText()
                 }
                 
             }
@@ -459,7 +459,7 @@ updateText()
                 if (sizeSelector > 1)
                 {
                     sizeSelector = sizeSelector - 1
-                   updateText()
+                    updateText()
                 }
             }
             
@@ -467,24 +467,24 @@ updateText()
             var k = 0
             for buyButton  in buyNode
             {
-  
+                
                 if self.atPoint(location) == buyButton {
                     switch k {
                     case 0:
                         buyPot(pot: Potion(potionType: potionTypes.reDraw, size: sizeSelector))
-    updateText()
+                        updateText()
                     case 1:
                         buyPot(pot: Potion(potionType: potionTypes.reSize, size: sizeSelector))
-    updateText()
+                        updateText()
                     case 2:
                         buyPot(pot: Potion(potionType: potionTypes.sharpness, size: sizeSelector))
-    updateText()
+                        updateText()
                     case 3:
                         buyPot(pot: Potion(potionType: potionTypes.boldness, size: sizeSelector))
-    updateText()
+                        updateText()
                     case 4:
                         buyPot(pot: Potion(potionType: potionTypes.quickDraw, size: sizeSelector))
-    updateText()
+                        updateText()
                     default:
                         break
                     }
@@ -501,24 +501,24 @@ updateText()
             k = 0
             for sellButton  in sellNode
             {
-                var q = 0
+                
                 if self.atPoint(location) == sellButton {
                     switch k {
                     case 0:
                         sellPot(pot: Potion(potionType: potionTypes.reDraw, size: sizeSelector))
-    updateText()
+                        updateText()
                     case 1:
                         sellPot(pot: Potion(potionType: potionTypes.reSize, size: sizeSelector))
-    updateText()
+                        updateText()
                     case 2:
                         sellPot(pot: Potion(potionType: potionTypes.sharpness, size: sizeSelector))
-    updateText()
+                        updateText()
                     case 3:
                         sellPot(pot: Potion(potionType: potionTypes.boldness, size: sizeSelector))
-    updateText()
+                        updateText()
                     case 4:
                         sellPot(pot: Potion(potionType: potionTypes.quickDraw, size: sizeSelector))
-    updateText()
+                        updateText()
                     default:
                         break
                     }
@@ -580,7 +580,7 @@ updateText()
     
     func updateText ()
     {
-           goldTl.text = "Gold: \(inven.gold)"
+        goldTl.text = "Gold: \(inven.gold)"
         var counter = 0
         for potName in potionNameTl
         {
@@ -673,7 +673,7 @@ updateText()
                 {
                     if (sPot.size == tempPot.size)
                     {
-                    quant = quant + 1
+                        quant = quant + 1
                     }
                 }
             }
