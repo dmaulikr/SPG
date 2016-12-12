@@ -43,6 +43,7 @@ class Upgrade
         upgradeDef(cDef: lameItem.attack)
         upgradeSpd(cSpd: lameItem.speed)
         upgradeHP(cHP: lameItem.health)
+        upgradeItem.itemLevel = upgradeItem.itemLevel + 1
     }
     var itemsEqual = false
     //MARK: Deconstruction

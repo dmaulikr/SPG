@@ -11,7 +11,7 @@ import SpriteKit
 class InstructionScene: SKScene {
     
     let backButton = SKSpriteNode(imageNamed:"back")
-    let playButton = SKSpriteNode(imageNamed:"play")
+    let playButton = SKSpriteNode(imageNamed:"back")
     let titleText = SKLabelNode(fontNamed: "Chalkduster")
     let swipeRighttext = SKLabelNode(fontNamed: "Chalkduster")
     
@@ -91,7 +91,7 @@ SoundPlayer.sharedHelper.playBackgroundMusic()
 
             
             if self.atPoint(location) == self.playButton{
-                let scene = InventoryScene(size: self.size)
+                let scene = MainMenuScene(size: self.size)
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill

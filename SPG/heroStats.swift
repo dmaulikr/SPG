@@ -58,9 +58,9 @@ class HeroStats {
         startItem2.changeColor(nColor: UIColor.blue)
         startItem3.changeColor(nColor: UIColor.blue)
         
-        startItem1.setStats(nName: "Shitty Sword", nHealth: 1, nAttack: 0, nDefense: 0,nSpeed: 0)
-        startItem2.setStats(nName: "Shitty Sword 2", nHealth: 0, nAttack: 1, nDefense: 0,nSpeed: 0)
-        startItem3.setStats(nName: "Shitty Sword 3", nHealth: 0, nAttack: 0, nDefense: 1,nSpeed: 0)
+        startItem1.setStats(nName: "weak shader", nHealth: 1, nAttack: 0, nDefense: 0,nSpeed: 0)
+        startItem2.setStats(nName: "thin line", nHealth: 0, nAttack: 1, nDefense: 0,nSpeed: 0)
+        startItem3.setStats(nName: "Non-Bold line", nHealth: 0, nAttack: 0, nDefense: 1,nSpeed: 0)
         
         equipItem(whichSlot: 1, newItem: startItem1)
         equipItem(whichSlot: 2, newItem: startItem2)

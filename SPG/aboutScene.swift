@@ -19,7 +19,7 @@ class AboutScene: SKScene {
 
     // all the buttons YEEEEEEEEEEEEE
     let backButton = SKSpriteNode(imageNamed:"back")
-    let playButton = SKSpriteNode(imageNamed:"play")
+    let playButton = SKSpriteNode(imageNamed:"back")
     
     let titleText = SKLabelNode(fontNamed: "Chalkduster")
     let about1Text = SKLabelNode(fontNamed: "Chalkduster")
@@ -71,7 +71,7 @@ class AboutScene: SKScene {
 
             
             if self.atPoint(location) == self.playButton{
-                let scene = InventoryScene(size: self.size)
+                let scene = MainMenuScene(size: self.size)
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill

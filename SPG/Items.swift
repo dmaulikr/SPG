@@ -98,10 +98,6 @@ class Items {
             rareDouble = 5
         }
     
-        
-        
-        
-        
         self.buyPrice = (self.health + self.speed + self.attack + self.defense) + (Double(self.itemLevel) * (rareDouble) )
     }
     func setSellPrice()
