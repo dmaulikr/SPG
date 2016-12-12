@@ -24,6 +24,7 @@ class HeroStats {
     var baseDefense = Double(0)
     var baseSpeed = Double(0)
     
+    var totalHP = Double(0)
     var level = Double(0)
     var currEXP = Double(0)
     var needEXP = Double(0)
@@ -89,7 +90,10 @@ class HeroStats {
         currDefense = item1.defense + item2.defense + item3.defense + baseDefense
     }
     
-    
+    func getTotalHP ()
+    {
+         totalHP = item1.health + item2.health + item3.health + baseHealth
+    }
     
     func gainEXP (EXPgained:Double)
     {

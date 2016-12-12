@@ -75,7 +75,10 @@ class MaterialScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     var buyNodeHeight = Double(0)
     var buyNodeWidth = Double(0)
     var selectPotionBoxY = CGFloat(0)
-    let mainMenuButton = SKSpriteNode(imageNamed:"play")
+    let mainMenuButton = SKSpriteNode(imageNamed:"back")
+    
+    let upgradeButton = SKSpriteNode(imageNamed:"upgradeButton")
+    let deconButton = SKSpriteNode(imageNamed:"deconButton")
     
     var baseItemPage = Int32(0)
     var heroInfo = HeroStats()
@@ -289,18 +292,18 @@ class MaterialScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         self.yGTL.zPosition = 1
         
         //MARK: increas size button khjkhk
-        upgradeNode.name = "incSize"
-        upgradeNode.fillColor = UIColor.blue
-        upgradeNode.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)) + CGFloat((buyNodeWidth * 1.5)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - CGFloat(buyNodeHeight + 90))
-        upgradeNode.zPosition = 1
-        self.addChild(upgradeNode)
+        upgradeButton.name = "incSize"
+        
+        upgradeButton.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)) + CGFloat((buyNodeWidth * 1.5)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - CGFloat(buyNodeHeight + 90))
+        upgradeButton.zPosition = 1
+        self.addChild(upgradeButton)
         
         //MARK: dec size button
-        deconNode.name = "incSize"
+        deconButton.name = "incSize"
         deconNode.fillColor = UIColor.black
-        deconNode.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)) + CGFloat((buyNodeWidth / 2)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - CGFloat(buyNodeHeight + 90))
-        deconNode.zPosition = 1
-        self.addChild(deconNode)
+        deconButton.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)) + CGFloat((buyNodeWidth / 2)) - CGFloat(40), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - CGFloat(buyNodeHeight + 90))
+        deconButton.zPosition = 1
+        self.addChild(deconButton)
         
         self.addChild(self.yTl)
         self.addChild(self.yLSTL)
@@ -406,7 +409,7 @@ class MaterialScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
             }
             
             //MARK: Decon button
-            if self.atPoint(location) == self.deconNode{
+            if self.atPoint(location) == self.deconButton{
                 
                 let newItem = inven.itemList[itemNum]
                 upgradeItem = Upgrade(item: newItem)
@@ -414,33 +417,39 @@ class MaterialScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 inven.addMats(maType: .bolder, amount: upgradeItem.BolderV)
                 inven.addMats(maType: .cornerP, amount: upgradeItem.CornPiV)
                 inven.gold = inven.gold + upgradeItem.goldV
-                print(inven.materialList.count)
-   inven.itemList.remove(at: itemNum)
-                print(inven.materialList.count)
-                print("ASDF2")
+                
+                inven.itemList.remove(at: itemNum)
+                
+                
                 inven.countMats()
-                print("ASDF3")
+                
                 resetScene()
-                print("ASDF4")
+                
             }
             //MARK: upgrade button
-            if self.atPoint(location) == self.upgradeNode{
+            if self.atPoint(location) == self.upgradeButton{
                 inven.countMats()
                 let newItem = inven.itemList[itemNum]
                 upgradeItem = Upgrade(item: newItem)
-
+                
                 if (upgradeItem.BolderCost >= inven.Bcount)
                 {
-
+                    print("ERROR bolder")
                     
                 }
                 else if (upgradeItem.lineSegCost >= inven.LScount)
                 {
-
+                    print("ERROR LS ")
                 }
                 else if (upgradeItem.CornPiCost >= inven.CPcount)
                 {
-
+                    print("ERROR CP")
+                }
+                else if (upgradeItem.goldCost >= inven.gold)
+                {
+                    print("ERROR GOLD")
+                    print(upgradeItem.goldCost)
+                    print(inven.gold)
                 }
                 else
                 {
@@ -450,7 +459,9 @@ class MaterialScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                     inven.gold = inven.gold - upgradeItem.goldCost
                     inven.itemList[itemNum] = upgradeItem.upgradeItem
                     updateSelectedWords(sItem: inven.itemList[itemNum])
+                    resetScene()
                 }
+                
                 
             }
             

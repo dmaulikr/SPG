@@ -19,9 +19,9 @@ class ShopBuyScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     let sceneTitleSize = CGFloat(72)
     let informationTitleSize = CGFloat(32)
     let informationSize = CGFloat(24)
-        var goldTl = SKLabelNode(fontNamed: "Chalkduster")
-    
-        var buyNode = [SKShapeNode]()
+    var goldTl = SKLabelNode(fontNamed: "Chalkduster")
+    var buyLabel = [SKLabelNode(fontNamed: "Chalkduster")]
+    var buyNode = [SKShapeNode]()
     
     var ItemTl = [SKLabelNode(fontNamed: "Chalkduster")]
     var ItemHPTl = [SKLabelNode(fontNamed: "Chalkduster")]
@@ -32,8 +32,8 @@ class ShopBuyScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     var ItemLvlTl = [SKLabelNode(fontNamed: "Chalkduster")]
     var ItemPrice = [SKLabelNode(fontNamed: "Chalkduster")]
     
-        let mainMenuButton = SKSpriteNode(imageNamed:"play")
-            let sellButton = SKSpriteNode(imageNamed:"play")
+    let mainMenuButton = SKSpriteNode(imageNamed:"back")
+    let sellButton = SKSpriteNode(imageNamed:"sellButton")
     
     var itemInfoBoxX = CGFloat(0)
     var itemInfoBoxY = CGFloat(0)
@@ -43,7 +43,7 @@ class ShopBuyScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     var buyNodeWidth = Double(0)
     var selectitemBoxY = CGFloat(0)
     
-let numberXInfos = Double(4)
+    let numberXInfos = Double(4)
     
     
     override func didMove(to view: SKView) {
@@ -53,7 +53,7 @@ let numberXInfos = Double(4)
         
         buyNodeWidth = Double(self.frame.size.width / 4) - 10
         buyNodeHeight = Double(60)
-
+        
         spaceBetweenitemInfoY = -30
         spaceBetweenitemInfoX = (self.frame.size.width / CGFloat(2))
         selectitemBoxY = (self.frame.size.height / CGFloat(3))
@@ -75,7 +75,7 @@ let numberXInfos = Double(4)
             ItemRarityTl.append(SKLabelNode(fontNamed: "Chalkduster"))
             ItemLvlTl.append(SKLabelNode(fontNamed: "Chalkduster"))
             ItemPrice.append(SKLabelNode(fontNamed: "Chalkduster"))
-
+            buyLabel.append(SKLabelNode(fontNamed: "Chalkduster"))
             buyNode.append(SKShapeNode(rectOf: CGSize(width: buyNodeWidth, height: buyNodeHeight)))
         }
         
@@ -90,8 +90,8 @@ let numberXInfos = Double(4)
         //MARK: potion name
         for name in ItemTl
         {
-
-
+            
+            
             name.text = shopKeep.itemShopList[counter].name
             name.fontSize = 32
             name.fontColor  = UIColor.orange
@@ -276,14 +276,14 @@ let numberXInfos = Double(4)
                 i = 0
             }
         }
-
+        
         //MARK: Buy Buttons
         i = 0
         j = 0
         counter = 0
         for buy in buyNode
         {
-
+            
             buy.name = "buy\(counter)"
             buy.fillColor = UIColor.green
             buy.position = CGPoint(x: itemInfoBoxX + (spaceBetweenitemInfoX * CGFloat(i)) + CGFloat((buyNodeWidth * 0.5)), y:  (itemInfoBoxY) - (selectitemBoxY * CGFloat(j)) + (spaceBetweenitemInfoY * 5) - 100)
@@ -298,11 +298,33 @@ let numberXInfos = Double(4)
             }
         }
         
-
+        //MARK: Buy Buttons
+        i = 0
+        j = 0
+        counter = 0
+        for buyLbl in buyLabel
+        {
+            
+            
+            buyLbl.text = "Buy"
+            buyLbl.fontSize = 32
+            buyLbl.fontColor  = UIColor.orange
+            buyLbl.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+            buyLbl.position = CGPoint(x: itemInfoBoxX + (spaceBetweenitemInfoX * CGFloat(i)), y:  (itemInfoBoxY) - (selectitemBoxY * CGFloat(j)) + (spaceBetweenitemInfoY * 8.5))
+            buyLbl.zPosition = 14
+            self.addChild(buyLbl)
+            counter = counter + 1
+            i = i + 1
+            if (i == numberXInfos)
+            {
+                j = j + 1
+                i = 0
+            }
+        }
         //MARK: Button positions
         self.mainMenuButton.position = CGPoint(x: self.frame.maxX - (mainMenuButton.size.width / 2),y: self.frame.minY + mainMenuButton.size.height / 2)
         mainMenuButton.zPosition = 1
-self.addChild(mainMenuButton)
+        self.addChild(mainMenuButton)
         self.sellButton.position = CGPoint(x: self.frame.maxX - (sellButton.size.width * 1.5),y: self.frame.minY + sellButton.size.height / 2)
         sellButton.zPosition = 1
         self.addChild(sellButton)
@@ -344,23 +366,26 @@ self.addChild(mainMenuButton)
                 skView.presentScene(scene)
             }
             
-                        var k = 0
+            var k = 0
             for buyItem  in buyNode
             {
                 if self.atPoint(location) == buyItem {
-
+                    print("hit buy boc")
                     if (invenI.gold > shopKeep.itemShopList[k].buyPrice)
                     {
                         invenI.addItem(nItem: shopKeep.itemShopList[k])
-                        
-        goldTl.text = "Gold: \(invenI.gold)"
+                        invenI.gold = invenI.gold - shopKeep.itemShopList[k].buyPrice
+                        goldTl.text = "Gold: \(invenI.gold)"
                     }
                     
                 }
-                else
-                {
-
-                    
+                else if self.atPoint(location) == buyLabel[k] {
+                    if (invenI.gold > shopKeep.itemShopList[k].buyPrice)
+                    {
+                        invenI.addItem(nItem: shopKeep.itemShopList[k])
+                        invenI.gold = invenI.gold - shopKeep.itemShopList[k].buyPrice
+                        goldTl.text = "Gold: \(invenI.gold)"
+                    }
                 }
                 k = k + 1
                 

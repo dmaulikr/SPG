@@ -80,8 +80,8 @@ class InventoryScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     let ItemDescTl = SKLabelNode(fontNamed: "Chalkduster")
     let ItemNameTl = SKLabelNode(fontNamed: "Chalkduster")
     // Buttons on the bottom Like Adventure and leave and all that jazz
-    let mainMenuButton = SKSpriteNode(imageNamed:"play")
-    let backButton = SKSpriteNode(imageNamed:"about")
+    let mainMenuButton = SKSpriteNode(imageNamed:"back")
+    let backButton = SKSpriteNode(imageNamed:"back")
     
     var inven = Inventory.SIinven
     

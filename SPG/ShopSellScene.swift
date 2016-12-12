@@ -59,8 +59,9 @@ class ShopSellScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     var buyNodeHeight = Double(0)
     var buyNodeWidth = Double(0)
     var selectPotionBoxY = CGFloat(0)
-    let mainMenuButton = SKSpriteNode(imageNamed:"play")
-    
+    let mainMenuButton = SKSpriteNode(imageNamed:"back")
+    let buyButton = SKSpriteNode(imageNamed:"buyButton")
+    let sellButton = SKSpriteNode(imageNamed:"sellButton")
     var baseItemPage = Int32(0)
     var heroInfo = HeroStats()
     var inven = Inventory.SIinven
@@ -79,7 +80,6 @@ class ShopSellScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         selectPotionBoxY = (self.frame.size.height / CGFloat(3))
         
 
-        deconNode = SKShapeNode(rectOf: CGSize(width: buyNodeWidth, height: buyNodeHeight + 30))
         // Setting the Item info box postions and all that Zazz
         
         itemInfoBoxX = (self.frame.minX )
@@ -97,8 +97,7 @@ class ShopSellScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         self.bg.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
         self.bg.zPosition = 0
         
-        self.hero.position = CGPoint(x: self.frame.midX / 4,y: self.frame.midY)
-        self.hero.zPosition = 1
+
         
         
         
@@ -110,13 +109,7 @@ class ShopSellScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         drawInven()
         
         
-        //MARK: Adding player Items
-        // The first Item and all that fun stuff
-        heroInfo.item1.setPositons(xP: Double(self.frame.midX) + ((heroInfo.item1.xSize + 20) * (0)), yP: (Double(self.frame.midY) + (heroInfo.item1.xSize + 20)) - (heroInfo.item1.xSize + 20) * 3 )
-        
-        //MARK: Player Items Positions
-        // Item 1
-        heroInfo.item1.setPositons(xP: Double(itemInfoBoxX) + ((heroInfo.item1.xSize + 20) * (0)), yP: (Double(itemInfoBoxY) + heroInfo.item1.ySize) )
+
         // The labels and all that
         self.ItemTl.text = heroInfo.item1.name
         self.ItemTl.fontSize = informationTitleSize
@@ -184,11 +177,12 @@ class ShopSellScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
 
         
         //MARK: dec size button
-        deconNode.name = "incSize"
-        deconNode.fillColor = UIColor.black
-        deconNode.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)) + CGFloat((buyNodeWidth / 2)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - CGFloat(buyNodeHeight + 90))
-        deconNode.zPosition = 1
-        self.addChild(deconNode)
+        
+        sellButton.name = "SellButton"
+
+        sellButton.position = CGPoint(x: self.frame.maxX - (buyButton.size.width * 1.5), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - CGFloat(buyNodeHeight + 90))
+        sellButton.zPosition = 1
+        self.addChild(sellButton)
         
 
         self.addChild(self.yGTL)
@@ -206,11 +200,13 @@ class ShopSellScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         self.addChild(self.ItemSpdTl)
         self.addChild(self.ItemRarityTl)
         self.addChild(self.ItemLvlTl)
-        
+        self.addChild(self.ItemSellTl)
         
         // self.addChild(self.InventoryTl)
         self.addChild(self.bg)
-        
+        self.buyButton.position = CGPoint(x: self.frame.maxX - (buyButton.size.width * 1.5),y: self.frame.minY + buyButton.size.height / 2)
+        buyButton.zPosition = 1
+        self.addChild(buyButton)
         
         self.addChild(self.mainMenuButton)
         
@@ -281,7 +277,7 @@ class ShopSellScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
             }
             
             //MARK: Decon button
-            if self.atPoint(location) == self.deconNode{
+            if self.atPoint(location) == self.sellButton{
                 
                 let newItem = inven.itemList[itemNum]
                 inven.gold = inven.gold + newItem.sellPrice
@@ -291,7 +287,15 @@ class ShopSellScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 resetScene()
 
             }
-
+            //MARK: Sell Button
+            if self.atPoint(location) == self.buyButton{
+                let scene = ShopBuyScene(size: self.size)
+                let skView = self.view! as SKView
+                skView.ignoresSiblingOrder = true
+                scene.scaleMode = .resizeFill
+                scene.size = skView.bounds.size
+                skView.presentScene(scene)
+            }
             
             //MARK: Inventory Item selection and all that
             var k = 0
@@ -329,17 +333,9 @@ class ShopSellScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         self.ItemLvlTl.text = "Item Level: \(sItem.itemLevel) "
         self.ItemSellTl.text = "SellValue: \(sItem.sellPrice)"
         
+        
+    }
 
-        
-        updateMats()
-        
-    }
-    func updateMats()
-    {
-        inven.countMats()
-        
-        self.yGTL.text = "Gold: \(inven.gold)"
-    }
     func clearTB()
     {
         self.ItemTl.text = ""

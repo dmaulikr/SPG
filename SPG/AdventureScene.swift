@@ -43,8 +43,9 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     
     
     // Buttons on the bottom Like Adventure and leave and all that jazz
-    let attackButton = SKSpriteNode(imageNamed:"play")
-    let runButton = SKSpriteNode(imageNamed:"about")
+    let attackButton = SKSpriteNode(imageNamed:"attackButton")
+    let runButton = SKSpriteNode(imageNamed:"runButton")
+    let potionButton = SKSpriteNode(imageNamed:"potionsButton")
     
     var heroInfo = HeroStats.SIHero
     var adven = Adventure.sharedInst
@@ -55,8 +56,12 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     
     var enemTHP = Double(0)
     override func didMove(to view: SKView) {
-        heroTHP = heroInfo.currHealth
-        
+heroInfo.getTotalHP()
+        heroTHP = heroInfo.totalHP
+        print("Speed\(heroInfo.currSpeed)")
+       print("Attack\(heroInfo.currAttack)")
+       print("Defense\(heroInfo.currDefense)")
+
         bg.size.height = self.size.height
         bg.size.width = self.size.width
         self.bg.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
@@ -78,10 +83,23 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         self.hero.position = CGPoint(x: self.frame.midX / 4,y: self.frame.midY)
         self.hero.zPosition = 1
         
+        for eMon in adven.monsters
+        {
+            if (eMon.currHealth <= 0)
+            {
+                enemyCounter = enemyCounter + 1
+            }
+            else {
+                break
+            }
+        }
+        
         currEnemy = adven.monsters[enemyCounter]
         currEnemy.setPositons(xP: Double(Double(self.frame.midX + self.frame.maxX) / 2), yP: Double(self.frame.midY))
         currEnemy.changeColor(nColor: UIColor.gray)
         enemTHP = currEnemy.currHealth
+        
+        
         
         
         self.enemTl.text = currEnemy.name
@@ -108,9 +126,13 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         self.attackButton.position = CGPoint(x: self.frame.maxX - (attackButton.size.width / 2),y: self.frame.minY + attackButton.size.height / 2)
         attackButton.zPosition = 1
         
+        //MARK: Button positions
+        self.potionButton.position = CGPoint(x: self.frame.maxX - (attackButton.size.width * 1.5),y: self.frame.minY + attackButton.size.height / 2)
+        potionButton.zPosition = 1
+        
         self.runButton.position = CGPoint(x: self.frame.minX + (runButton.size.width / 2),y: self.frame.minY + runButton.size.height / 2)
         runButton.zPosition = 1
-        
+        self.addChild(potionButton)
         self.addChild(enemHPTl)
         self.addChild(enemTl)
         self.addChild(currEnemy.enemyNode)
@@ -155,6 +177,27 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 
             }
             
+            if self.atPoint(location) == self.potionButton{
+                
+                print(heroInfo.currHealth)
+
+                HeroStats.SIHero = heroInfo
+                HeroStats.SIHero.currHealth = HeroStats.SIHero.currHealth
+                                print(HeroStats.SIHero.currHealth)
+                Adventure.sharedInst = adven
+                let scene = usePotionScene(size: self.size)
+                let skView = self.view! as SKView
+                skView.ignoresSiblingOrder = true
+                scene.scaleMode = .resizeFill
+                scene.size = skView.bounds.size
+                skView.presentScene(scene)
+                
+                
+                
+                //Adventure.sharedInst = Adventure(lvl: Double(Adventure.levelCount))
+                
+            }
+            
             if self.atPoint(location) == self.attackButton{
                 
                 //currEnemy.changeColor(nColor: UIColor.black)
@@ -170,7 +213,7 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                     
                     isHeroDead()
                     isEnemyDead()
-                    
+                    print(heroInfo.currHealth)
                     // InventoryTl.text = "HP \(Double(round(100 * heroInfo.currHealth)/100)) E: \(Double(round(100 * currEnemy.currHealth)/100)) "
                     
                 }
@@ -184,7 +227,7 @@ class AdventureScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                     
                     
                     isEnemyDead()
-                    
+                    print(heroInfo.currHealth)
                     //InventoryTl.text = "HP \(Double(round(100 * heroInfo.currHealth)/100)) E: \(Double(round(100 * currEnemy.currHealth)/100)) "
                 }
             }

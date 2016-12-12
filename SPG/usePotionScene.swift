@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 // This is the games scene and all that jazz
-class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
+class usePotionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
 {
     // Font Sizes
     let sceneTitleSize = CGFloat(72)
@@ -41,17 +41,14 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     var potionQuanTl = [SKLabelNode(fontNamed: "Chalkduster")]
     var potionEffNTl = [SKLabelNode(fontNamed: "Chalkduster")]
     var potionPriceTl = [SKLabelNode(fontNamed: "Chalkduster")]
-        var potionBuyTl = [SKLabelNode(fontNamed: "Chalkduster")]
-            var potionSellTl = [SKLabelNode(fontNamed: "Chalkduster")]
     var goldTl = SKLabelNode(fontNamed: "Chalkduster")
     
     var sizeSelector = Int32(1)
     var buyNode = [SKShapeNode]()
     
     var sellNode = [SKShapeNode]()
-    var incSizeLbl = SKLabelNode(fontNamed: "Chalkduster")
+    
     var incSizeNode = SKShapeNode()
-    var decSizeLbl = SKLabelNode(fontNamed: "Chalkduster")
     var decSizeNode = SKShapeNode()
     
     var buyNodeHeight = Double(0)
@@ -70,7 +67,7 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
     
     var baseItemPage = Int32(0)
     
-    var heroInfo = HeroStats()
+    var heroInfo = HeroStats.SIHero
     
     var selectPotionBoxY = CGFloat(0)
     
@@ -82,7 +79,7 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         // buyNode.fillColor = UIColor.green
         // buyNode.position = CGPoint(x: xP,y: yP )
         // buyNode.zPosition = 100
-        
+        print("potins scene \(heroInfo.currHealth)")
         buyNodeWidth = Double(self.frame.size.width / 4) - 10
         buyNodeHeight = Double(60)
         
@@ -95,13 +92,11 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
             potionQuanTl.append(SKLabelNode(fontNamed: "Chalkduster"))
             potionEffNTl.append(SKLabelNode(fontNamed: "Chalkduster"))
             potionPriceTl.append(SKLabelNode(fontNamed: "Chalkduster"))
-            potionBuyTl.append(SKLabelNode(fontNamed: "Chalkduster"))
-            potionSellTl.append(SKLabelNode(fontNamed: "Chalkduster"))
             buyNode.append(SKShapeNode(rectOf: CGSize(width: buyNodeWidth, height: buyNodeHeight)))
-            sellNode.append(SKShapeNode(rectOf: CGSize(width: buyNodeWidth, height: buyNodeHeight)))
+
         }
         buyNode.append(SKShapeNode(rectOf: CGSize(width: buyNodeWidth, height: buyNodeHeight)))
-        sellNode.append(SKShapeNode(rectOf: CGSize(width: buyNodeWidth, height: buyNodeHeight)))
+
         
         potionInfoList.append(Potion(potionType: potionTypes.reDraw,size: 1))
         potionInfoList.append(Potion(potionType: potionTypes.reSize,size: 1))
@@ -122,7 +117,7 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         
         SoundPlayer.sharedHelper.playBackgroundMusic()
         heroInfo = HeroStats.SIHero
-        heroInfo.updateStats()
+
         bg.size.height = self.size.height
         bg.size.width = self.size.width
         self.bg.position = CGPoint(x: self.frame.midX,y: self.frame.midY)
@@ -331,78 +326,9 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 i = 0
             }
         }
-        //MARK: SELL labels
-        i = 0
-        j = 0
-        counter = 0
-        for pot in potionBuyTl
-        {
-            
-            
-            pot.text = "Buy"
-            pot.fontSize = 32
-            pot.fontColor  = UIColor.white
-            pot.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-             pot.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(i)) + CGFloat(buyNodeWidth), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(j)) + (spaceBetweenPotionInfoY * 5.3) )
-            pot.zPosition = 4
-            self.addChild(pot)
-            counter = counter + 1
-            i = i + 1
-            if (i == 2)
-            {
-                j = j + 1
-                i = 0
-            }
-        }
-        //MARK: buy labels
-        i = 0
-        j = 0
-        counter = 0
-        for pot in potionSellTl
-        {
-            
-            
-            pot.text = "Sell"
-            pot.fontSize = 32
-            pot.fontColor  = UIColor.white
-            pot.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-            pot.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(i)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(j)) + (spaceBetweenPotionInfoY * 5.3) )
-            pot.zPosition = 4
-            self.addChild(pot)
-            counter = counter + 1
-            i = i + 1
-            if (i == 2)
-            {
-                j = j + 1
-                i = 0
-            }
-        }
-        //MARK: Sell buttons
-        i = 0
-        j = 0
-        counter = 0
-        for sell in sellNode
-        {
-            
-
-            
-            sell.name = "sellPotionBlocks"
-            sell.fillColor = UIColor.red
-           sell.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(i)) + CGFloat((buyNodeWidth * 0.5)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(j)) + (spaceBetweenPotionInfoY * 5) - 10)
-            sell.zPosition = 1
-            self.addChild(sell)
-            counter = counter + 1
-            i = i + 1
-            if (i == 2)
-            {
-                j = j + 1
-                i = 0
-            }
-        }
-        
 
         
-        //MARK: Buy Buttons
+        //MARK: use  Buttons
         i = 0
         j = 0
         counter = 0
@@ -444,29 +370,12 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         incSizeNode.zPosition = 1
         self.addChild(incSizeNode)
         
-        decSizeLbl.text = "+ Size"
-        decSizeLbl.fontSize = 32
-        decSizeLbl.fontColor  = UIColor.orange
-        decSizeLbl.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-     decSizeLbl.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - CGFloat(buyNodeHeight + 90))
-        decSizeLbl.zPosition = 1
-        self.addChild(decSizeLbl)
-        
         //MARK: dec size button
         decSizeNode.name = "incSize"
         decSizeNode.fillColor = UIColor.black
         decSizeNode.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)) + CGFloat((buyNodeWidth / 2)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - CGFloat(buyNodeHeight + 90))
         decSizeNode.zPosition = 1
         self.addChild(decSizeNode)
-        
-        incSizeLbl.text = "- Size"
-        incSizeLbl.fontSize = 32
-        incSizeLbl.fontColor  = UIColor.orange
-        incSizeLbl.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-        incSizeLbl.position = CGPoint(x: potionInfoBoxX + (spaceBetweenPotionInfoX * CGFloat(1)) + CGFloat((buyNodeWidth)), y:  (potionInfoBoxY) - (selectPotionBoxY * CGFloat(1)) + (spaceBetweenPotionInfoY * 5) - CGFloat(buyNodeHeight + 90))
-        incSizeLbl.zPosition = 1
-        self.addChild(incSizeLbl)
-        
         
         //MARK: Button positions
         self.mainMenuButton.position = CGPoint(x: self.frame.maxX - (mainMenuButton.size.width / 2),y: self.frame.minY + mainMenuButton.size.height / 2)
@@ -486,11 +395,10 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         
         
         
+        updateText()
         
-        
-        //MARK: Adding player Items
-        // The first Item and all that fun stuff
 
+        
         
         
         
@@ -506,8 +414,10 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
             
             //MARK: Main Menu Button
             if self.atPoint(location) == self.mainMenuButton{
-                let scene = MainMenuScene(size: self.size)
+                let scene = AdventureScene(size: self.size)
                 HeroStats.SIHero = heroInfo
+                                print("hero \(heroInfo.currHealth)")
+                print("SI hero \(HeroStats.SIHero.currHealth)")
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill
@@ -524,24 +434,9 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 }
                 
             }
-           else  if (self.atPoint(location) == self.incSizeLbl){
-                if (sizeSelector < 5)
-                {
-                    sizeSelector = sizeSelector + 1
-                    updateText()
-                }
-                
-            }
             
             //MARK: desc size
             if self.atPoint(location) == self.decSizeNode{
-                if (sizeSelector > 1)
-                {
-                    sizeSelector = sizeSelector - 1
-                    updateText()
-                }
-            }
-            else if (self.atPoint(location) == self.decSizeLbl){
                 if (sizeSelector > 1)
                 {
                     sizeSelector = sizeSelector - 1
@@ -557,19 +452,19 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 if self.atPoint(location) == buyButton {
                     switch k {
                     case 0:
-                        buyPot(pot: Potion(potionType: potionTypes.reDraw, size: sizeSelector))
+                        usePot(pot: Potion(potionType: potionTypes.reDraw, size: sizeSelector))
                         updateText()
                     case 1:
-                        buyPot(pot: Potion(potionType: potionTypes.reSize, size: sizeSelector))
+                        usePot(pot: Potion(potionType: potionTypes.reSize, size: sizeSelector))
                         updateText()
                     case 2:
-                        buyPot(pot: Potion(potionType: potionTypes.sharpness, size: sizeSelector))
+                        usePot(pot: Potion(potionType: potionTypes.sharpness, size: sizeSelector))
                         updateText()
                     case 3:
-                        buyPot(pot: Potion(potionType: potionTypes.boldness, size: sizeSelector))
+                        usePot(pot: Potion(potionType: potionTypes.boldness, size: sizeSelector))
                         updateText()
                     case 4:
-                        buyPot(pot: Potion(potionType: potionTypes.quickDraw, size: sizeSelector))
+                        usePot(pot: Potion(potionType: potionTypes.quickDraw, size: sizeSelector))
                         updateText()
                     default:
                         break
@@ -584,40 +479,7 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 k = k + 1
                 
             }
-            k = 0
-            for sellButton  in sellNode
-            {
-                
-                if self.atPoint(location) == sellButton {
-                    switch k {
-                    case 0:
-                        sellPot(pot: Potion(potionType: potionTypes.reDraw, size: sizeSelector))
-                        updateText()
-                    case 1:
-                        sellPot(pot: Potion(potionType: potionTypes.reSize, size: sizeSelector))
-                        updateText()
-                    case 2:
-                        sellPot(pot: Potion(potionType: potionTypes.sharpness, size: sizeSelector))
-                        updateText()
-                    case 3:
-                        sellPot(pot: Potion(potionType: potionTypes.boldness, size: sizeSelector))
-                        updateText()
-                    case 4:
-                        sellPot(pot: Potion(potionType: potionTypes.quickDraw, size: sizeSelector))
-                        updateText()
-                    default:
-                        break
-                    }
-                    
-                }
-                else
-                {
-                    
-                    
-                }
-                k = k + 1
-                
-            }
+
             
             
         }
@@ -629,7 +491,7 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         {
             inven.potionList.append(pot)
             inven.gold = inven.gold - pot.buyPrice
-
+            
         }
         else
         {
@@ -637,7 +499,7 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         }
     }
     //MARK: sell potion Func
-    func sellPot(pot: Potion)
+    func usePot(pot: Potion)
     {
         var found = false
         var counter = 0
@@ -656,10 +518,57 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         if (found == true)
         {
             inven.potionList.remove(at: counter)
-            inven.gold = inven.gold + pot.sellPrice
+            
+            switch pot.potionType {
+            case .reSize:
+                useHPPot(potSize: pot.size)
+            case .boldness:
+                useDefPot(potSize: pot.size)
+            case .sharpness:
+                useAttPot(potSize: pot.size)
+            case .quickDraw:
+                useSpdPot(potSize: pot.size)
+            case .reDraw:
+                useDefPot(potSize: pot.size)
+ 
+            }
+
+            
         }
+    }
+    
+    func useHPPot (potSize: Int32)
+    {
+        let tempPot = Potion(potionType: .reSize, size: potSize)
+        heroInfo.currHealth = heroInfo.currHealth + tempPot.effectNum
+        heroInfo.getTotalHP()
+        if (heroInfo.currHealth > heroInfo.totalHP)
+        {
+            heroInfo.currHealth = heroInfo.totalHP
+        }
+        
+    }
+    
+    func useAttPot (potSize: Int32)
+    {
+        let tempPot = Potion(potionType: .quickDraw, size: potSize)
+        heroInfo.currAttack = heroInfo.currAttack + tempPot.effectNum
 
         
+    }
+    
+    func useDefPot (potSize: Int32)
+    {
+        let tempPot = Potion(potionType: .boldness, size: potSize)
+        heroInfo.currDefense = heroInfo.currDefense + tempPot.effectNum
+        
+        
+    }
+    
+    func useSpdPot (potSize: Int32)
+    {
+        let tempPot = Potion(potionType: .boldness, size: potSize)
+        heroInfo.currSpeed = heroInfo.currSpeed + tempPot.effectNum
     }
     
     func updateText ()

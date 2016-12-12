@@ -28,12 +28,12 @@ class MainMenuScene : SKScene {
     let bg = SKSpriteNode(imageNamed:"bg")
     
     // Buttons and all that fun stuff
-    let inventoryButton = SKSpriteNode(imageNamed:"play")
-    let shopButton = SKSpriteNode(imageNamed:"about")
-    let reagantButton = SKSpriteNode(imageNamed:"tutoriel")
-    let upgradeButton = SKSpriteNode(imageNamed:"leaderboard")
+    let inventoryButton = SKSpriteNode(imageNamed:"inventoryButton")
+    let shopButton = SKSpriteNode(imageNamed:"shopButton")
+    let reagantButton = SKSpriteNode(imageNamed:"potionsButton")
+    let upgradeButton = SKSpriteNode(imageNamed:"upgradeButton")
     let trainButton = SKSpriteNode(imageNamed:"tutoriel")
-    let adventureButton = SKSpriteNode(imageNamed:"leaderboard")
+    let adventureButton = SKSpriteNode(imageNamed:"adventureButton")
     
     // Labels and all that fun stuff
     let Title = SKLabelNode(fontNamed: "Chalkduster")
@@ -397,7 +397,7 @@ class MainMenuScene : SKScene {
         self.addChild(self.shopButton)
         self.addChild(self.reagantButton)
         self.addChild(self.upgradeButton)
-        self.addChild(self.trainButton)
+       // self.addChild(self.trainButton)
         self.addChild(self.adventureButton)
         
     }
@@ -438,14 +438,7 @@ class MainMenuScene : SKScene {
                 scene.size = skView.bounds.size
                 skView.presentScene(scene)
             }
-            if self.atPoint(location) == self.trainButton{
-                let scene = AdventureScene(size: self.size)
-                let skView = self.view! as SKView
-                skView.ignoresSiblingOrder = true
-                scene.scaleMode = .resizeFill
-                scene.size = skView.bounds.size
-                skView.presentScene(scene)
-            }
+
             if self.atPoint(location) == self.adventureButton{
                 let scene = AdventureScene(size: self.size)
                 let skView = self.view! as SKView

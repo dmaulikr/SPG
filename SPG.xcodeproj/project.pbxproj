@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F04037A1DFE515C0057CAD0 /* ShopSellScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0403791DFE515C0057CAD0 /* ShopSellScene.swift */; };
+		3F04037C1DFE89160057CAD0 /* usePotionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F04037B1DFE89160057CAD0 /* usePotionScene.swift */; };
 		3F378FC61DE69DB6006211AB /* InventoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FC51DE69DB6006211AB /* InventoryScene.swift */; };
 		3F378FCA1DE6AADC006211AB /* heroStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FC91DE6AADC006211AB /* heroStats.swift */; };
 		3F378FCD1DE6AD44006211AB /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FCC1DE6AD44006211AB /* Items.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		3F0403791DFE515C0057CAD0 /* ShopSellScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopSellScene.swift; sourceTree = "<group>"; };
+		3F04037B1DFE89160057CAD0 /* usePotionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = usePotionScene.swift; sourceTree = "<group>"; };
 		3F378FC51DE69DB6006211AB /* InventoryScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryScene.swift; sourceTree = "<group>"; };
 		3F378FC91DE6AADC006211AB /* heroStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = heroStats.swift; sourceTree = "<group>"; };
 		3F378FCC1DE6AD44006211AB /* Items.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				3F378FEB1DFB5570006211AB /* MaterialScene.swift */,
 				3FECCB6D1DFCE0DB00FD799E /* ShopBuyScene.swift */,
 				3F0403791DFE515C0057CAD0 /* ShopSellScene.swift */,
+				3F04037B1DFE89160057CAD0 /* usePotionScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				3F378FCF1DE6BF08006211AB /* enemy.swift in Sources */,
 				3F378FEE1DFB787C006211AB /* Upgrade.swift in Sources */,
 				3F378FE61DFA59AC006211AB /* Potion.swift in Sources */,
+				3F04037C1DFE89160057CAD0 /* usePotionScene.swift in Sources */,
 				3F378FC61DE69DB6006211AB /* InventoryScene.swift in Sources */,
 				3F378FCD1DE6AD44006211AB /* Items.swift in Sources */,
 				3F378FD51DF13141006211AB /* Adventure.swift in Sources */,
