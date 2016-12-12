@@ -74,6 +74,8 @@ class Items {
         self.speed = 69
         self.description = " "
         self.itemLevel = 1
+        setBuyPrice()
+        setSellPrice()
     }
     
     func setBuyPrice()
@@ -100,27 +102,11 @@ class Items {
         
         
         
-        self.buyPrice = (self.health + self.speed + self.attack + self.defense) + ((self.itemLevel) * (rareDouble) )
+        self.buyPrice = (self.health + self.speed + self.attack + self.defense) + (Double(self.itemLevel) * (rareDouble) )
     }
     func setSellPrice()
     {
-        var rareDouble = Double (0)
-        if (self.rarity == "Common")
-        {
-            rareDouble = 1
-        }
-        else if (self.rarity == "Uncommon")
-        {
-            rareDouble = 2
-        }
-        if (self.rarity == "Rare")
-        {
-            rareDouble = 3
-        }
-        else if (self.rarity == "Legendary")
-        {
-            rareDouble = 5
-        }
+
         
         
         self.sellPrice = buyPrice / 2 

@@ -334,6 +334,16 @@ self.addChild(mainMenuButton)
                 skView.presentScene(scene)
             }
             
+            //MARK: Sell Button
+            if self.atPoint(location) == self.sellButton{
+                let scene = ShopSellScene(size: self.size)
+                let skView = self.view! as SKView
+                skView.ignoresSiblingOrder = true
+                scene.scaleMode = .resizeFill
+                scene.size = skView.bounds.size
+                skView.presentScene(scene)
+            }
+            
                         var k = 0
             for buyItem  in buyNode
             {
@@ -342,6 +352,7 @@ self.addChild(mainMenuButton)
                     if (invenI.gold > shopKeep.itemShopList[k].buyPrice)
                     {
                         invenI.addItem(nItem: shopKeep.itemShopList[k])
+                        
         goldTl.text = "Gold: \(invenI.gold)"
                     }
                     
