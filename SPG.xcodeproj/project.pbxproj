@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F04037A1DFE515C0057CAD0 /* ShopSellScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0403791DFE515C0057CAD0 /* ShopSellScene.swift */; };
 		3F378FC61DE69DB6006211AB /* InventoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FC51DE69DB6006211AB /* InventoryScene.swift */; };
 		3F378FCA1DE6AADC006211AB /* heroStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FC91DE6AADC006211AB /* heroStats.swift */; };
 		3F378FCD1DE6AD44006211AB /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F378FCC1DE6AD44006211AB /* Items.swift */; };
@@ -34,9 +35,12 @@
 		3F3862521DE67BA30071472C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F3862501DE67BA30071472C /* Main.storyboard */; };
 		3F3862541DE67BA40071472C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F3862531DE67BA40071472C /* Assets.xcassets */; };
 		3F3862571DE67BA40071472C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F3862551DE67BA40071472C /* LaunchScreen.storyboard */; };
+		3FECCB6E1DFCE0DB00FD799E /* ShopBuyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FECCB6D1DFCE0DB00FD799E /* ShopBuyScene.swift */; };
+		3FECCB701DFCE2E000FD799E /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FECCB6F1DFCE2E000FD799E /* Shop.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F0403791DFE515C0057CAD0 /* ShopSellScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopSellScene.swift; sourceTree = "<group>"; };
 		3F378FC51DE69DB6006211AB /* InventoryScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryScene.swift; sourceTree = "<group>"; };
 		3F378FC91DE6AADC006211AB /* heroStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = heroStats.swift; sourceTree = "<group>"; };
 		3F378FCC1DE6AD44006211AB /* Items.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
@@ -66,6 +70,8 @@
 		3F3862531DE67BA40071472C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F3862561DE67BA40071472C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F3862581DE67BA40071472C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FECCB6D1DFCE0DB00FD799E /* ShopBuyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopBuyScene.swift; sourceTree = "<group>"; };
+		3FECCB6F1DFCE2E000FD799E /* Shop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +96,8 @@
 				3F378FE31DF888D6006211AB /* MainMenuScene.swift */,
 				3F378FE71DFA649B006211AB /* potionScene.swift */,
 				3F378FEB1DFB5570006211AB /* MaterialScene.swift */,
+				3FECCB6D1DFCE0DB00FD799E /* ShopBuyScene.swift */,
+				3F0403791DFE515C0057CAD0 /* ShopSellScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -105,6 +113,7 @@
 				3F378FE51DFA59AC006211AB /* Potion.swift */,
 				3F378FE91DFB480D006211AB /* Materials.swift */,
 				3F378FED1DFB787C006211AB /* Upgrade.swift */,
+				3FECCB6F1DFCE2E000FD799E /* Shop.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -234,9 +243,11 @@
 			files = (
 				3F378FDC1DF24203006211AB /* SoundPlayer.swift in Sources */,
 				3F378FD71DF239CC006211AB /* aboutScene.swift in Sources */,
+				3F04037A1DFE515C0057CAD0 /* ShopSellScene.swift in Sources */,
 				3F378FD11DEFF32B006211AB /* inventory.swift in Sources */,
 				3F378FE81DFA649B006211AB /* potionScene.swift in Sources */,
 				3F38624D1DE67BA30071472C /* GameScene.swift in Sources */,
+				3FECCB6E1DFCE0DB00FD799E /* ShopBuyScene.swift in Sources */,
 				3F38624F1DE67BA30071472C /* GameViewController.swift in Sources */,
 				3F378FEA1DFB480D006211AB /* Materials.swift in Sources */,
 				3F378FEC1DFB5570006211AB /* MaterialScene.swift in Sources */,
@@ -249,6 +260,7 @@
 				3F378FC61DE69DB6006211AB /* InventoryScene.swift in Sources */,
 				3F378FCD1DE6AD44006211AB /* Items.swift in Sources */,
 				3F378FD51DF13141006211AB /* Adventure.swift in Sources */,
+				3FECCB701DFCE2E000FD799E /* Shop.swift in Sources */,
 				3F378FE41DF888D6006211AB /* MainMenuScene.swift in Sources */,
 				3F3862471DE67BA30071472C /* AppDelegate.swift in Sources */,
 			);

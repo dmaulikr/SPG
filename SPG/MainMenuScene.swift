@@ -415,7 +415,7 @@ class MainMenuScene : SKScene {
                 skView.presentScene(scene)
             }
             if self.atPoint(location) == self.shopButton{
-                let scene = AboutScene(size: self.size)
+                let scene = ShopBuyScene(size: self.size)
                 let skView = self.view! as SKView
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .resizeFill

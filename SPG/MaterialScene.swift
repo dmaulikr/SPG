@@ -428,19 +428,19 @@ class MaterialScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
                 inven.countMats()
                 let newItem = inven.itemList[itemNum]
                 upgradeItem = Upgrade(item: newItem)
-                var allGood = true
+
                 if (upgradeItem.BolderCost >= inven.Bcount)
                 {
-                    allGood = false
+
                     
                 }
                 else if (upgradeItem.lineSegCost >= inven.LScount)
                 {
-                    allGood = false
+
                 }
                 else if (upgradeItem.CornPiCost >= inven.CPcount)
                 {
-                    allGood = false
+
                 }
                 else
                 {

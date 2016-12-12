@@ -543,8 +543,7 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
         {
             inven.potionList.append(pot)
             inven.gold = inven.gold - pot.buyPrice
-            print("Gold: \(inven.gold)")
-            print("Potion list count: \(inven.potionList.count)")
+
         }
         else
         {
@@ -573,8 +572,7 @@ class potionScene : SKScene, SKPhysicsContactDelegate, UITextFieldDelegate
             inven.potionList.remove(at: counter)
             inven.gold = inven.gold + pot.sellPrice
         }
-        print("Gold: \(inven.gold)")
-        print("Potion list count: \(inven.potionList.count)")
+
         
     }
     
